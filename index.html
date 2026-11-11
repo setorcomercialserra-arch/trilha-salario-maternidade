@@ -1,0 +1,850 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Trilha Salário-Maternidade RGO</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Nunito+Sans:wght@400;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+html{color-scheme:light dark}body{margin:0}img{max-width:100%}
+/* Layout: trilha colorida em abas; cada estação tem sua cor e seu ícone, ilustrações em SVG inline feitas a partir dos tokens */
+:root{
+  --bg:#f6f7fb; --surface:#ffffff; --sunk:#eef0f6; --fg:#1b2033; --muted:#5b6178; --line:#dde1ec;
+  --teal:#0b8f87; --coral:#e0524c; --amber:#d98a00; --violet:#7b4fd6; --blue:#2c6fdb; --pink:#d4458c; --green:#2a9a4a; --indigo:#3f4fbf; --orange:#e2650f;
+  --skin:#f1c7a8; --hair:#4a2f27;
+  --ok:#1f8a43; --warn:#b26f00; --bad:#c2312f; --info:#2c6fdb;
+  --f-display:"Plus Jakarta Sans","Segoe UI",system-ui,sans-serif; --f-body:"Nunito Sans","Segoe UI",system-ui,sans-serif; --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  --r:14px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#12141f; --surface:#1b1e2c; --sunk:#232738; --fg:#eceef6; --muted:#a6abc2; --line:#2f3448;
+  --teal:#3fd0c5; --coral:#ff7f78; --amber:#ffbd45; --violet:#a98bff; --blue:#6ea4ff; --pink:#ff7dbb; --green:#5fd383; --indigo:#8d9bff; --orange:#ff9d57;
+  --skin:#d9a888; --hair:#2a1b16;
+  --ok:#5fd383; --warn:#ffbd45; --bad:#ff7f78; --info:#6ea4ff; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#12141f; --surface:#1b1e2c; --sunk:#232738; --fg:#eceef6; --muted:#a6abc2; --line:#2f3448;
+  --teal:#3fd0c5; --coral:#ff7f78; --amber:#ffbd45; --violet:#a98bff; --blue:#6ea4ff; --pink:#ff7dbb; --green:#5fd383; --indigo:#8d9bff; --orange:#ff9d57;
+  --skin:#d9a888; --hair:#2a1b16;
+  --ok:#5fd383; --warn:#ffbd45; --bad:#ff7f78; --info:#6ea4ff; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:16px;line-height:1.55}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+h1,h2,h3,h4{font-family:var(--f-display);line-height:1.2;text-wrap:balance;margin:0}
+h1{font-size:1.45rem;font-weight:800}
+h2{font-size:1.5rem;font-weight:800}
+h3{font-size:1.06rem;font-weight:700}
+p{margin:0}
+a{color:var(--c,var(--teal));font-weight:700}
+.mono{font-family:var(--f-mono);font-size:.88em;font-variant-numeric:tabular-nums}
+.wrap{max-width:1000px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.soft{background:color-mix(in srgb,var(--c) 13%,var(--surface))}
+.ic{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:0 0 auto}
+.badge{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:12px;background:color-mix(in srgb,var(--c) 16%,var(--surface));color:var(--c);flex:0 0 auto}
+.badge.solid{background:var(--c);color:var(--surface)}
+
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
+.rainbow{height:5px;background:linear-gradient(90deg,var(--teal),var(--blue),var(--violet),var(--pink),var(--coral),var(--amber),var(--green))}
+.brand{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding-block:12px 6px}
+.brand small{color:var(--muted);font-size:.85rem}
+nav.tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:10px;scrollbar-width:thin}
+nav.tabs a{flex:0 0 auto;display:flex;align-items:center;gap:6px;text-decoration:none;color:var(--fg);font-weight:700;font-size:.9rem;padding:6px 12px 6px 8px;border-radius:999px;border:1.5px solid color-mix(in srgb,var(--c) 35%,var(--line));background:var(--surface)}
+nav.tabs a .ic{width:18px;height:18px;color:var(--c)}
+nav.tabs a:hover{background:color-mix(in srgb,var(--c) 12%,var(--surface))}
+nav.tabs a[aria-current="page"]{background:var(--c);border-color:var(--c);color:var(--surface)}
+nav.tabs a[aria-current="page"] .ic{color:var(--surface)}
+a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,.node:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+main{padding-block:26px 64px}
+section.view{display:grid;gap:22px}
+.head{display:flex;gap:16px;align-items:center}
+.head .badge{width:60px;height:60px;border-radius:18px}
+.head .badge .ic{width:30px;height:30px}
+.head>div{display:grid;gap:4px;min-width:0}
+.lead{color:var(--muted);max-width:68ch;font-size:1.05rem}
+.eyebrow{text-transform:uppercase;letter-spacing:.09em;font-size:.74rem;font-weight:800;color:var(--c)}
+.stack{display:grid;gap:10px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.grid2>*,.grid3>*{min-width:0}
+.pill{display:inline-block;font-size:.8rem;font-weight:800;padding:3px 10px;border-radius:999px;white-space:nowrap;background:color-mix(in srgb,var(--c) 16%,var(--surface));color:var(--c)}
+.p-ok{--c:var(--ok)}.p-warn{--c:var(--warn)}.p-bad{--c:var(--bad)}.p-info{--c:var(--info)}
+ul.clean{margin:0;padding-left:1.1em;display:grid;gap:6px}
+ul.clean li::marker{color:var(--c,var(--teal))}
+.callout{--c:var(--amber);display:flex;gap:12px;align-items:flex-start;border-radius:var(--r);padding:14px 16px;background:color-mix(in srgb,var(--c) 14%,var(--surface));border:1.5px solid color-mix(in srgb,var(--c) 45%,transparent)}
+.callout .ic{color:var(--c);margin-top:2px}
+.callout.info{--c:var(--blue)}.callout.bad{--c:var(--coral)}.callout.ok{--c:var(--green)}
+.law{font-family:var(--f-mono);font-size:.78rem;color:var(--muted)}
+button.btn{font:inherit;font-weight:700;border:1.5px solid var(--line);background:var(--surface);color:var(--fg);padding:10px 14px;border-radius:10px;cursor:pointer;text-align:left}
+button.btn:hover{border-color:var(--c,var(--teal));background:color-mix(in srgb,var(--c,var(--teal)) 8%,var(--surface))}
+button.btn.primary{background:var(--c,var(--teal));color:var(--surface);border-color:var(--c,var(--teal))}
+
+/* Abertura */
+.hero{--c:var(--teal);border-radius:22px;overflow:hidden;display:grid;grid-template-columns:1.1fr 1fr;align-items:center;background:linear-gradient(135deg,color-mix(in srgb,var(--teal) 18%,var(--surface)),color-mix(in srgb,var(--violet) 16%,var(--surface)) 55%,color-mix(in srgb,var(--pink) 18%,var(--surface)))}
+.hero .txt{padding:28px;display:grid;gap:12px}
+.hero h2{font-size:1.9rem}
+.hero svg{width:100%;height:auto;display:block}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:6px;background:var(--surface);border-radius:999px;padding:5px 12px 5px 8px;font-weight:700;font-size:.9rem}
+.chip .ic{width:18px;height:18px;color:var(--c)}
+@media (max-width:700px){.hero{grid-template-columns:1fr}.hero .txt{padding:22px 20px 4px}.hero h2{font-size:1.5rem}}
+
+/* Mapa */
+.mapbox{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow-x:auto}
+.mapbox svg{display:block;width:100%;height:auto;min-width:760px}
+.mapbox text{font-family:var(--f-display)}
+.node{cursor:pointer}
+.node .box{fill:color-mix(in srgb,var(--c) 12%,var(--surface));stroke:var(--c);stroke-width:2;transition:fill .15s}
+.node:hover .box,.node.sel .box{fill:var(--c)}
+.node .tt{fill:var(--fg);font-weight:700}
+.node .sub{font-family:var(--f-body);fill:var(--muted);font-size:12px}
+.node:hover .tt,.node.sel .tt,.node:hover .sub,.node.sel .sub{fill:var(--surface)}
+.node .circ{fill:var(--c)}
+.node:hover .circ,.node.sel .circ{fill:var(--surface)}
+.node .gl{stroke:var(--surface)}
+.node:hover .gl,.node.sel .gl{stroke:var(--c)}
+.edge{stroke-width:3;fill:none;stroke-linecap:round;opacity:.55}
+.mapcards{display:none;grid-template-columns:1fr 1fr;gap:8px}
+.mapcards button{font:inherit;display:flex;gap:8px;align-items:center;padding:10px;border-radius:12px;border:1.5px solid var(--c);background:color-mix(in srgb,var(--c) 10%,var(--surface));color:var(--fg);font-weight:700;text-align:left;cursor:pointer}
+.mapcards button .ic{color:var(--c)}
+.mapcards button.sel{background:var(--c);color:var(--surface)}.mapcards button.sel .ic{color:var(--surface)}
+@media (max-width:640px){.mapbox{display:none}.mapcards{display:grid}}
+.detail{border-radius:var(--r);padding:18px;display:flex;gap:16px;align-items:flex-start;border:2px solid var(--c);background:color-mix(in srgb,var(--c) 9%,var(--surface))}
+.detail>div{display:grid;gap:8px;min-width:0}
+
+/* Fluxo */
+.road{display:flex;gap:0;overflow-x:auto;padding:4px 0 8px}
+.road .st{flex:1 0 110px;display:grid;justify-items:center;gap:6px;text-align:center;position:relative;font-weight:700;font-size:.85rem;cursor:pointer;background:none;border:0;color:var(--fg);font-family:var(--f-body);padding:0 4px}
+.road .st::after{content:"";position:absolute;top:22px;left:calc(50% + 26px);right:calc(-50% + 26px);height:4px;border-radius:4px;background:color-mix(in srgb,var(--c) 40%,var(--line))}
+.road .st:last-child::after{display:none}
+.road .st .badge{width:46px;height:46px;border-radius:50%}
+ol.steps{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+details.step{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--c);border-radius:var(--r)}
+details.step>summary{cursor:pointer;list-style:none;display:flex;gap:14px;align-items:center;padding:14px 16px}
+details.step>summary::-webkit-details-marker{display:none}
+details.step>summary .t{display:grid;gap:2px;min-width:0}
+details.step>summary .t span{color:var(--muted);font-size:.9rem}
+details.step>summary .num{font-family:var(--f-display);font-weight:800;color:var(--c);font-size:.8rem;letter-spacing:.06em}
+details.step[open]>summary .badge{background:var(--c);color:var(--surface)}
+details.step .body{padding:0 16px 16px 74px;display:grid;gap:10px}
+@media (max-width:560px){details.step .body{padding-left:16px}}
+
+/* Triagem */
+.wiz{--c:var(--violet);display:grid;gap:16px}
+.wiz .q{font-family:var(--f-display);font-size:1.25rem;font-weight:800;display:flex;gap:12px;align-items:center}
+.wiz .opts{display:grid;gap:8px}
+.wiz .opts .btn{display:flex;gap:10px;align-items:center}
+.wiz .opts .btn::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--c);flex:0 0 auto}
+.crumbs{display:flex;flex-wrap:wrap;gap:6px;font-size:.85rem;color:var(--muted)}
+.crumbs span{background:color-mix(in srgb,var(--c) 12%,var(--surface));color:var(--fg);padding:3px 9px;border-radius:8px}
+.result{border-radius:var(--r);padding:18px;display:flex;gap:14px;align-items:flex-start;border:2px solid var(--c);background:color-mix(in srgb,var(--c) 12%,var(--surface))}
+.result>div{display:grid;gap:6px;min-width:0}
+.result.ok{--c:var(--ok)}.result.bad{--c:var(--bad)}.result.warn{--c:var(--warn)}.result.info{--c:var(--info)}
+.result h3{font-size:1.2rem;color:var(--c)}
+
+/* Categorias */
+.quick{display:flex;gap:6px;flex-wrap:wrap}
+.quick button{font:inherit;font-weight:700;font-size:.82rem;padding:5px 11px;border-radius:999px;border:1.5px solid color-mix(in srgb,var(--c,var(--teal)) 45%,var(--line));background:var(--surface);color:var(--fg);cursor:pointer}
+.quick button.on{background:var(--c,var(--teal));color:var(--surface);border-color:var(--c,var(--teal))}
+.cat{border-radius:var(--r);overflow:hidden;border:1px solid var(--line);background:var(--surface);display:grid}
+.cat .top{display:flex;gap:12px;align-items:center;padding:14px 16px;background:color-mix(in srgb,var(--c) 15%,var(--surface))}
+.cat .top .badge{background:var(--c);color:var(--surface)}
+.cat dl{margin:0;padding:12px 16px 16px;display:grid;gap:8px}
+.cat dt{font-size:.72rem;text-transform:uppercase;letter-spacing:.07em;font-weight:800;color:var(--c)}
+.cat dd{margin:0}
+.cat .who{display:inline-flex;align-items:center;gap:6px;font-weight:800}
+
+/* Regras */
+.rule{display:flex;gap:14px;align-items:flex-start}
+.rule .stack{min-width:0;gap:4px}
+.rule .tag{font-family:var(--f-mono);font-size:.72rem;font-weight:500;color:var(--c)}
+.rule.card{border-top:5px solid var(--c)}
+
+/* Calculadoras */
+.form{display:grid;gap:12px}
+.form label{display:grid;gap:4px;font-weight:700;font-size:.92rem}
+.hint{font-weight:400;color:var(--muted);font-size:.86rem}
+input,select{font:inherit;font-family:var(--f-body);padding:9px 11px;border:1.5px solid var(--line);border-radius:10px;background:var(--bg);color:var(--fg);width:100%}
+.check{display:flex!important;align-items:center;gap:8px}
+.check input{width:auto;accent-color:var(--c)}
+.out{background:color-mix(in srgb,var(--c) 9%,var(--surface));border-radius:12px;padding:14px;display:grid;gap:6px}
+.out .big{font-family:var(--f-mono);font-size:1.35rem;font-weight:500;color:var(--c)}
+.tl{width:100%;height:auto;display:block}
+.tl text{font-family:var(--f-body);font-size:11px;fill:var(--fg)}
+.tl .lbl{fill:var(--muted)}
+.calccard{border-top:5px solid var(--c)}
+
+/* Sistemas */
+.sys{border-radius:var(--r);background:var(--surface);border:1px solid var(--line);overflow:hidden;display:grid}
+.sys .top{display:flex;gap:12px;align-items:center;padding:14px 16px;background:linear-gradient(120deg,color-mix(in srgb,var(--c) 22%,var(--surface)),var(--surface))}
+.sys .top .badge{background:var(--c);color:var(--surface)}
+.sys .bd{padding:4px 16px 16px;display:grid;gap:10px}
+.path{display:flex;flex-wrap:wrap;gap:4px;align-items:center;font-size:.88rem}
+.path b{background:var(--c);color:var(--surface);padding:4px 10px;border-radius:8px;font-weight:700}
+.path i{color:var(--c);font-style:normal;font-weight:800}
+.flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center;padding:16px;border-radius:var(--r);background:var(--surface);border:1px solid var(--line)}
+.flow .fstep{display:flex;align-items:center;gap:8px;font-weight:700}
+.flow .arrow{color:var(--muted);font-weight:800}
+
+/* Glossário */
+.search{max-width:420px}
+dl.gloss{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px;margin:0}
+dl.gloss>div{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 14px 14px 16px;min-width:0;border-left:6px solid var(--c)}
+dl.gloss dt{font-family:var(--f-display);font-weight:800;color:var(--c)}
+dl.gloss dd{margin:4px 0 0}
+
+/* Quiz */
+.qz{--c:var(--pink);display:grid;gap:12px}
+.qz .ans{display:grid;gap:8px}
+.qz .ans button{font:inherit;font-weight:600;text-align:left;padding:11px 13px;border-radius:10px;border:1.5px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer}
+.qz .ans button:hover:not(:disabled){border-color:var(--c)}
+.qz .ans button.right{background:color-mix(in srgb,var(--ok) 15%,var(--surface));border-color:var(--ok)}
+.qz .ans button.wrong{background:color-mix(in srgb,var(--bad) 15%,var(--surface));border-color:var(--bad)}
+.qz .ans button:disabled{cursor:default}
+.meter{height:10px;background:var(--sunk);border-radius:99px;overflow:hidden}
+.meter i{display:block;height:100%;background:linear-gradient(90deg,var(--teal),var(--violet),var(--pink));width:0;transition:width .3s}
+.dots{display:flex;gap:6px;flex-wrap:wrap}
+.dots span{width:14px;height:14px;border-radius:50%;background:var(--sunk)}
+.dots .r{background:var(--ok)}.dots .w{background:var(--bad)}.dots .c{outline:2px solid var(--c);outline-offset:1px}
+/* Anotações e reações */
+.rx{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.rx button{font:inherit;font-size:.82rem;font-weight:700;display:inline-flex;gap:5px;align-items:center;padding:3px 10px;border-radius:999px;border:1.5px solid var(--line);background:var(--surface);color:var(--muted);cursor:pointer}
+.rx button:hover{border-color:var(--orange);color:var(--fg)}
+.rx button.mine{background:color-mix(in srgb,var(--orange) 16%,var(--surface));border-color:var(--orange);color:var(--fg)}
+.rx button:disabled{opacity:.5;cursor:default}
+.rx .n{font-family:var(--f-mono);font-size:.74rem}
+.rx .ask{border-style:dashed;color:var(--orange)}
+.secrx{display:flex;gap:10px 14px;align-items:center;flex-wrap:wrap;padding:14px 16px;border-radius:var(--r);background:var(--surface);border:1.5px dashed color-mix(in srgb,var(--orange) 45%,var(--line))}
+.secrx>span{font-weight:700}
+.fab{position:fixed;right:calc(16px + env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:8;display:flex;gap:8px;align-items:center;font:inherit;font-weight:800;padding:12px 18px 12px 14px;border-radius:999px;border:0;background:var(--orange);color:var(--surface);box-shadow:0 8px 24px color-mix(in srgb,var(--fg) 25%,transparent);cursor:pointer}
+.selbtn{position:fixed;z-index:9;display:flex;gap:6px;align-items:center;font:inherit;font-weight:800;font-size:.85rem;padding:7px 12px 7px 9px;border-radius:999px;border:0;background:var(--fg);color:var(--bg);cursor:pointer;box-shadow:0 6px 18px color-mix(in srgb,var(--fg) 30%,transparent)}
+.selbtn .ic{width:16px;height:16px}
+dialog.comp{border:0;border-radius:18px;padding:0;width:min(540px,calc(100vw - 32px));background:var(--surface);color:var(--fg);box-shadow:0 20px 60px color-mix(in srgb,var(--fg) 35%,transparent)}
+dialog.comp::backdrop{background:color-mix(in srgb,var(--fg) 45%,transparent)}
+.comp form{padding:20px;display:grid;gap:14px;border-top:6px solid var(--orange)}
+textarea{font:inherit;font-family:var(--f-body);padding:10px 11px;border:1.5px solid var(--line);border-radius:10px;background:var(--bg);color:var(--fg);width:100%;min-height:110px;resize:vertical}
+.seg{display:flex;gap:6px;flex-wrap:wrap}
+.seg button{font:inherit;font-weight:700;display:inline-flex;gap:6px;align-items:center;padding:7px 14px 7px 10px;border-radius:999px;border:1.5px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer}
+.seg button.on{background:var(--c);border-color:var(--c);color:var(--surface)}
+blockquote.qt{margin:0;padding:8px 12px;border-left:4px solid var(--c,var(--orange));background:color-mix(in srgb,var(--c,var(--orange)) 9%,var(--surface));border-radius:0 10px 10px 0;font-style:italic}
+.note{border-left:6px solid var(--c);display:grid;gap:10px}
+.note .meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center;color:var(--muted);font-size:.85rem}
+.note .txt{white-space:pre-wrap;overflow-wrap:anywhere}
+.note .resp{background:color-mix(in srgb,var(--green) 11%,var(--surface));border-radius:10px;padding:10px 12px;display:grid;gap:4px}
+.note .resp .txt{font-weight:600}
+.actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.btn.sm{padding:5px 11px;font-size:.85rem}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px;display:grid;gap:2px;border-top:5px solid var(--c)}
+.stat b{font-family:var(--f-display);font-size:1.7rem;color:var(--c);line-height:1.1}
+.stat span{color:var(--muted);font-size:.88rem;font-weight:600}
+.status{font-size:.88rem;color:var(--muted);display:flex;gap:8px;align-items:center}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:9;background:var(--fg);color:var(--bg);padding:9px 16px;border-radius:999px;font-weight:700}
+.hotlist{display:grid;gap:6px;margin:0;padding:0;list-style:none}
+.hotlist li{display:flex;justify-content:space-between;gap:10px;padding:8px 12px;border-radius:10px;background:var(--surface);border:1px solid var(--line)}
+footer{color:var(--muted);font-size:.85rem;padding-block:24px 96px;border-top:1px solid var(--line)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+</head>
+<body>
+<header class="top">
+  <div class="rainbow"></div>
+  <div class="wrap">
+    <div class="brand"><h1>Trilha Salário-Maternidade</h1><small>RGO Advocacia · treinamento · atualizado em 11/11/2026</small></div>
+    <nav class="tabs" id="tabs" aria-label="Seções"></nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- MAPA -->
+<section class="view" id="v-mapa" style="--c:var(--teal)">
+  <div class="hero">
+    <div class="txt">
+      <div class="eyebrow">Bem-vinda à trilha</div>
+      <h2>O que é o salário-maternidade?</h2>
+      <p>É o valor que o INSS (ou a empresa) paga à mãe por <b>120 dias</b> depois do nascimento, adoção ou guarda. Nosso trabalho é olhar os documentos da cliente e dizer se ela tem esse direito.</p>
+      <div class="chips">
+        <span class="chip" style="--c:var(--pink)"><svg class="ic"><use href="#i-cert"/></svg>Certidão</span>
+        <span class="chip" style="--c:var(--blue)"><svg class="ic"><use href="#i-cnis"/></svg>CNIS</span>
+        <span class="chip" style="--c:var(--green)"><svg class="ic"><use href="#i-check"/></svg>Parecer</span>
+      </div>
+    </div>
+    <svg viewBox="0 0 420 300" aria-hidden="true">
+      <circle cx="230" cy="160" r="118" fill="var(--surface)" opacity=".7"/>
+      <circle cx="350" cy="60" r="26" fill="var(--amber)" opacity=".85"/>
+      <circle cx="70" cy="250" r="16" fill="var(--teal)" opacity=".6"/>
+      <circle cx="380" cy="230" r="10" fill="var(--violet)" opacity=".7"/>
+      <!-- certidão -->
+      <g transform="translate(40 70) rotate(-8)"><rect width="96" height="122" rx="10" fill="var(--surface)" stroke="var(--pink)" stroke-width="3"/><rect x="14" y="16" width="68" height="10" rx="5" fill="var(--pink)"/><rect x="14" y="38" width="56" height="7" rx="3.5" fill="var(--line)"/><rect x="14" y="54" width="64" height="7" rx="3.5" fill="var(--line)"/><rect x="14" y="70" width="44" height="7" rx="3.5" fill="var(--line)"/><circle cx="68" cy="98" r="12" fill="var(--pink)" opacity=".85"/></g>
+      <!-- CNIS -->
+      <g transform="translate(300 120) rotate(7)"><rect width="96" height="122" rx="10" fill="var(--surface)" stroke="var(--blue)" stroke-width="3"/><rect x="14" y="16" width="40" height="10" rx="5" fill="var(--blue)"/><rect x="16" y="86" width="12" height="20" rx="3" fill="var(--blue)" opacity=".5"/><rect x="34" y="66" width="12" height="40" rx="3" fill="var(--blue)" opacity=".7"/><rect x="52" y="52" width="12" height="54" rx="3" fill="var(--blue)"/><rect x="70" y="74" width="12" height="32" rx="3" fill="var(--teal)"/></g>
+      <!-- mãe e bebê -->
+      <path d="M160 290 C160 210 190 180 230 180 C270 180 300 210 300 290Z" fill="var(--teal)"/>
+      <circle cx="230" cy="138" r="34" fill="var(--skin)"/>
+      <path d="M194 136 C192 100 218 88 236 92 C262 96 272 118 266 150 C258 128 238 116 214 122 C206 124 200 130 194 136Z" fill="var(--hair)"/>
+      <ellipse cx="236" cy="236" rx="46" ry="30" fill="var(--amber)"/>
+      <circle cx="210" cy="222" r="20" fill="var(--skin)"/>
+      <path d="M190 236 C210 258 252 262 282 238" stroke="var(--skin)" stroke-width="12" fill="none" stroke-linecap="round"/>
+      <!-- coração e 120 -->
+      <path d="M318 74 c0-7 10-10 13-3 c3-7 13-4 13 3 c0 8-13 15-13 15 s-13-7-13-15z" fill="var(--coral)" transform="translate(-200 -30)"/>
+      <g transform="translate(318 30)"><rect width="74" height="40" rx="12" fill="var(--violet)"/><text x="37" y="27" text-anchor="middle" font-family="var(--f-display)" font-weight="800" font-size="18" fill="var(--surface)">120 dias</text></g>
+    </svg>
+  </div>
+
+  <div class="head"><span class="badge"><svg class="ic"><use href="#i-map"/></svg></span><div><div class="eyebrow">Mapa mental</div><h2>Os 8 assuntos da base</h2><p class="lead">Clique em cada bolha para ver o resumo e ir para a explicação completa.</p></div></div>
+  <div class="mapbox" role="group" aria-label="Mapa mental"><svg viewBox="0 0 980 540" id="mapsvg"></svg></div>
+  <div class="mapcards" id="mapcards"></div>
+  <div class="detail" id="mapdetail" aria-live="polite"></div>
+  <div class="callout info"><svg class="ic"><use href="#i-alert"/></svg><div><b>A regra de ouro:</b> nunca presuma. Se o documento não mostra, a resposta é "Não é possível concluir" e você pede o documento que falta.</div></div>
+</section>
+
+<!-- FLUXO -->
+<section class="view" id="v-fluxo" hidden style="--c:var(--blue)">
+  <div class="head"><span class="badge"><svg class="ic"><use href="#i-route"/></svg></span><div><div class="eyebrow">Passo a passo do parecer</div><h2>Como analisar um caso</h2><p class="lead">Sempre nesta ordem. A categoria depende do CNIS, e os requisitos dependem da categoria. Toque numa etapa para abrir.</p></div></div>
+  <div class="road" id="road"></div>
+  <ol class="steps" id="steps"></ol>
+</section>
+
+<!-- TRIAGEM -->
+<section class="view" id="v-triagem" hidden style="--c:var(--violet)">
+  <div class="head"><span class="badge"><svg class="ic"><use href="#i-branch"/></svg></span><div><div class="eyebrow">Treino prático</div><h2>Triagem guiada</h2><p class="lead">Responda com o que está no documento da cliente. No fim aparece a conclusão provável e o que conferir. O parecer final continua com o advogado.</p></div></div>
+  <div class="card wiz" id="wiz"></div>
+</section>
+
+<!-- CATEGORIAS -->
+<section class="view" id="v-categorias" hidden style="--c:var(--coral)">
+  <div class="head"><span class="badge"><svg class="ic"><use href="#i-user"/></svg></span><div><div class="eyebrow">Quem é a segurada</div><h2>Categorias de segurada</h2><p class="lead">Em pedidos desde 05/04/2024 não há carência. O que decide é a qualidade de segurada na data do parto. Use os botões para ver uma categoria por vez.</p></div></div>
+  <div class="callout"><svg class="ic"><use href="#i-money"/></svg><div><b>Quem paga?</b> Se ela está <b>empregada</b> no dia do parto, a <b>empresa</b> paga. Em todos os outros casos, o <b>INSS</b> paga direto.</div></div>
+  <div class="quick" id="catfilter"></div>
+  <div class="grid3" id="catcards"></div>
+</section>
+
+<!-- REGRAS -->
+<section class="view" id="v-regras" hidden style="--c:var(--amber)">
+  <div class="head"><span class="badge"><svg class="ic"><use href="#i-book"/></svg></span><div><div class="eyebrow">Combinados internos</div><h2>Regras do escritório</h2><p class="lead">Valem por cima da lei quando a lei deixa espaço para escolha. Se parecerem contraditórias com um texto legal, pergunte ao advogado antes de concluir.</p></div></div>
+  <div class="grid2" id="rules"></div>
+</section>
+
+<!-- CALCULADORAS -->
+<section class="view" id="v-calculadoras" hidden style="--c:var(--green)">
+  <div class="head"><span class="badge"><svg class="ic"><use href="#i-calc"/></svg></span><div><div class="eyebrow">Contas de todo dia</div><h2>Calculadoras</h2><p class="lead">Os campos já vêm com um exemplo. Troque pelos dados da cliente e veja a linha do tempo mudar.</p></div></div>
+  <div class="card form calccard" style="--c:var(--teal)">
+    <h3>Até quando ela tem qualidade de segurada?</h3>
+    <p class="hint">Regra do escritório: data de saída + meses de graça, mês seguinte, dia 15 do mês posterior. Com MPZ, mais 28 dias.</p>
+    <div class="grid2">
+      <label for="q-saida">Data de saída do último vínculo (ou da última contribuição)<input type="date" id="q-saida" value="2025-01-20"></label>
+      <label for="q-graca">Meses de graça
+        <select id="q-graca">
+          <option value="12" selected>12 meses: empregada, CI, MEI, doméstica</option>
+          <option value="6">6 meses: facultativa</option>
+          <option value="24">24 meses: 120+ contribuições, ou desemprego registrado</option>
+          <option value="36">36 meses: as duas prorrogações</option>
+        </select></label>
+      <label for="q-parto">Data do parto ou DPP (opcional)<input type="date" id="q-parto" value="2026-03-10"></label>
+      <label class="check" for="q-mpz"><input type="checkbox" id="q-mpz" checked> Aplicar MPZ (+28 dias)</label>
+    </div>
+    <svg class="tl" id="q-tl" viewBox="0 0 640 120" role="img" aria-label="Linha do tempo da qualidade de segurada"></svg>
+    <div class="out" id="q-out" aria-live="polite"></div>
+  </div>
+  <div class="card form calccard" style="--c:var(--violet)">
+    <h3>Essa competência pode gerar DARF?</h3>
+    <p class="hint">Só competências cujo prazo alcança o parto: competência + 14 meses, dia 15, + 28 dias; ou 2 anos se ela recebeu seguro-desemprego pago do último vínculo. Valor = (salário mínimo − remuneração) × 7,5%, código 1872.</p>
+    <div class="grid2">
+      <label for="d-parto">Data do parto<input type="date" id="d-parto" value="2026-04-15"></label>
+      <label for="d-comp">Competência abaixo do mínimo <span class="hint">MM/AAAA</span><input type="text" id="d-comp" value="02/2025" inputmode="numeric" placeholder="MM/AAAA"></label>
+      <label for="d-rem">Remuneração no CNIS (R$)<input type="number" id="d-rem" value="900" step="0.01" min="0"></label>
+      <label for="d-sm">Salário mínimo da competência (R$)<input type="number" id="d-sm" value="1518" step="0.01" min="0"><span class="quick"><button type="button" data-sm="1412">2024: 1.412</button><button type="button" data-sm="1518">2025: 1.518</button><button type="button" data-sm="1621">2026: 1.621</button></span></label>
+      <label class="check" for="d-seguro"><input type="checkbox" id="d-seguro"> Recebeu seguro-desemprego do último vínculo (já pago): prazo de 2 anos</label>
+    </div>
+    <svg class="tl" id="d-tl" viewBox="0 0 640 120" role="img" aria-label="Linha do tempo do prazo da DARF"></svg>
+    <div class="out" id="d-out" aria-live="polite"></div>
+  </div>
+  <div class="callout ok"><svg class="ic"><use href="#i-money"/></svg><div><b>GPS facultativa para grávida sem qualidade:</b> 11% do salário mínimo. Em 2026: <span class="mono">11% × R$ 1.621,00 = R$ 178,31</span>, paga <b>antes do parto</b>. Baixa renda não validada (<span class="mono">PREC-FBR</span>) se corrige complementando para 11% (6% do mínimo por competência), não com os 7,5%.</div></div>
+</section>
+
+<!-- SISTEMAS -->
+<section class="view" id="v-sistemas" hidden style="--c:var(--indigo)">
+  <div class="head"><span class="badge"><svg class="ic"><use href="#i-monitor"/></svg></span><div><div class="eyebrow">Onde estão as informações</div><h2>Sistemas do dia a dia</h2><p class="lead">A lista vem das planilhas, os documentos estão no AdvBox, o andamento no INSS aparece no Tramitação Inteligente. O CRM mostra o atendimento.</p></div></div>
+  <div class="flow" id="sysflow"></div>
+  <div class="callout bad"><svg class="ic"><use href="#i-lock"/></svg><div><b>Nunca</b> use senhas do gov.br que aparecem nas planilhas ou nas notas do AdvBox. Nunca mande mensagem nem finalize conversa no CRM.</div></div>
+  <div class="grid2" id="systems"></div>
+</section>
+
+<!-- GLOSSARIO -->
+<section class="view" id="v-glossario" hidden style="--c:var(--pink)">
+  <div class="head"><span class="badge"><svg class="ic"><use href="#i-dict"/></svg></span><div><div class="eyebrow">Vocabulário</div><h2>Glossário</h2><p class="lead">Siglas da lei e apelidos internos do escritório.</p></div></div>
+  <input type="search" id="gsearch" class="search" placeholder="Buscar termo (ex.: MPZ)" aria-label="Buscar termo">
+  <dl class="gloss" id="gloss"></dl>
+</section>
+
+<!-- QUIZ -->
+<section class="view" id="v-quiz" hidden style="--c:var(--pink)">
+  <div class="head"><span class="badge"><svg class="ic"><use href="#i-quiz"/></svg></span><div><div class="eyebrow">Teste o que aprendeu</div><h2>Quiz de casos</h2><p class="lead">Casos fictícios montados com as regras desta trilha. Cada resposta explica o porquê.</p></div></div>
+  <div class="card qz" id="quizbox"></div>
+</section>
+
+<!-- ANOTACOES -->
+<section class="view" id="v-anotacoes" hidden style="--c:var(--orange)">
+  <div class="head"><span class="badge"><svg class="ic"><use href="#i-note"/></svg></span><div><div class="eyebrow">Caderno da estagiária</div><h2>Anotações e dúvidas</h2><p class="lead">Tudo o que for anotado, perguntado ou marcado como "Confuso" na trilha aparece aqui. O advogado responde as dúvidas nesta mesma tela.</p></div></div>
+  <div class="status" id="nstatus">Carregando anotações…</div>
+  <div class="stats" id="nstats"></div>
+  <div class="card stack" id="nhot"></div>
+  <div class="actions"><div class="quick" id="nfilter"></div><button type="button" class="btn primary sm" id="nnew" style="--c:var(--orange)">+ Nova anotação ou dúvida</button></div>
+  <div class="stack" id="nlist"></div>
+</section>
+
+</main>
+<button type="button" class="fab" id="fab"><svg class="ic"><use href="#i-note"/></svg>Anotar ou perguntar</button>
+<button type="button" class="selbtn" id="selbtn" hidden><svg class="ic"><use href="#i-plus"/></svg>Anotar este trecho</button>
+<div class="toast" id="toast" hidden></div>
+<dialog class="comp" id="comp">
+  <form method="dialog" id="compform">
+    <h3>Nova anotação</h3>
+    <div class="seg" id="ctipo">
+      <button type="button" data-t="duvida" style="--c:var(--orange)"><svg class="ic"><use href="#i-quiz"/></svg>Dúvida</button>
+      <button type="button" data-t="anotacao" style="--c:var(--blue)"><svg class="ic"><use href="#i-note"/></svg>Anotação</button>
+    </div>
+    <label for="csec" style="display:grid;gap:4px;font-weight:700;font-size:.92rem">Sobre qual parte?<select id="csec"></select></label>
+    <div id="cquote" hidden></div>
+    <label for="cnome" style="display:grid;gap:4px;font-weight:700;font-size:.92rem">Seu nome<input type="text" id="cnome" maxlength="60" placeholder="Ex.: Ana (estagiária)"></label>
+    <label for="ctext" style="display:grid;gap:4px;font-weight:700;font-size:.92rem"><span id="clabel">Escreva sua dúvida</span><textarea id="ctext" required placeholder="Ex.: Por que a facultativa tem só 6 meses de graça?"></textarea></label>
+    <div class="actions" style="justify-content:flex-end"><button type="button" class="btn sm" id="ccancel">Cancelar</button><button type="submit" class="btn primary sm" id="csave" style="--c:var(--orange)">Salvar</button></div>
+  </form>
+</dialog>
+<footer><div class="wrap">Base: Lei 8.213/91, Decreto 3.048/99, IN PRES/INSS 128/2022 com redação da IN 188/2025, Memorando-Circular 10/2011 (MPZ) e Memorando-Circular Conjunto 44/2017 (MGR), além das regras internas da RGO Advocacia. Material de estudo; o parecer final é sempre revisado por um advogado.</div></footer>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-cert" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></symbol>
+  <symbol id="i-cnis" viewBox="0 0 24 24"><path d="M4 20V11M10 20V5M16 20v-7M21 20H3"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M5 4h12a2 2 0 012 2v14H7a2 2 0 01-2-2z"/><path d="M5 18a2 2 0 012-2h12M9 8h6"/></symbol>
+  <symbol id="i-monitor" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></symbol>
+  <symbol id="i-calc" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 11h1M12 11h1M16 11h0M8 15h1M12 15h1M8 18h1M12 18h4M16 14v4"/></symbol>
+  <symbol id="i-quiz" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 015 .5c0 1.5-2.5 2-2.5 3.5M12 17h.01"/></symbol>
+  <symbol id="i-dict" viewBox="0 0 24 24"><path d="M2 5h6a4 4 0 014 4v11a3 3 0 00-3-3H2zM22 5h-6a4 4 0 00-4 4v11a3 3 0 013-3h7z"/></symbol>
+  <symbol id="i-branch" viewBox="0 0 24 24"><circle cx="6" cy="18" r="3"/><circle cx="18" cy="6" r="3"/><path d="M6 3v12M18 9a9 9 0 01-9 9"/></symbol>
+  <symbol id="i-route" viewBox="0 0 24 24"><circle cx="6" cy="19" r="2"/><circle cx="18" cy="5" r="2"/><path d="M8 19h8a3 3 0 000-6H8a3 3 0 010-6h8"/></symbol>
+  <symbol id="i-map" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><circle cx="4" cy="5" r="2"/><circle cx="20" cy="5" r="2"/><circle cx="4" cy="19" r="2"/><circle cx="20" cy="19" r="2"/><path d="M6 6l4 4M18 6l-4 4M6 18l4-4M18 18l-4-4"/></symbol>
+  <symbol id="i-building" viewBox="0 0 24 24"><path d="M4 21V5l8-2v18M12 9h8v12M7 8h2M7 12h2M7 16h2M15 13h2M15 17h2M2 21h20"/></symbol>
+  <symbol id="i-house" viewBox="0 0 24 24"><path d="M3 11l9-7 9 7M5 10v10h14V10M10 20v-5h4v5"/></symbol>
+  <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M12 21V11M12 11C12 7 9 4 4 4c0 5 3 7 8 7zM12 14c0-3 3-6 8-6 0 5-3 6-8 6z"/></symbol>
+  <symbol id="i-bag" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 012-2h2a2 2 0 012 2v2M3 13h18"/></symbol>
+  <symbol id="i-pen" viewBox="0 0 24 24"><path d="M4 20l4-1 11-11-3-3L5 16zM14 7l3 3"/></symbol>
+  <symbol id="i-coin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 6.5v11M15 9.5c0-1.2-1.3-2-3-2s-3 .8-3 2 1.3 1.8 3 2.2 3 1 3 2.3-1.3 2-3 2-3-.8-3-2"/></symbol>
+  <symbol id="i-exit" viewBox="0 0 24 24"><path d="M14 3H5v18h9M10 12h11M18 9l3 3-3 3"/></symbol>
+  <symbol id="i-anchor" viewBox="0 0 24 24"><circle cx="12" cy="5" r="2"/><path d="M12 7v14M5 13a7 7 0 0014 0M8 11h8"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18h.01"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></symbol>
+  <symbol id="i-sheet" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></symbol>
+  <symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7 18a4 4 0 01-.5-8A6 6 0 0118 9a4 4 0 01-1 9z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 10h8"/></symbol>
+  <symbol id="i-money" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M6 9v6M18 9v6"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7-4.5-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.5-7 10-7 10z"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
+  <symbol id="i-scale" viewBox="0 0 24 24"><path d="M12 3v18M7 21h10M4 7h16M7 7l-3 7h6zM17 7l-3 7h6z"/></symbol>
+  <symbol id="i-briefcase-x" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5h6v2M10 11l4 4M14 11l-4 4"/></symbol>
+  <symbol id="i-note" viewBox="0 0 24 24"><path d="M5 3h10l4 4v14H5z"/><path d="M15 3v4h4M8 12h8M8 16h5"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+</svg>
+
+<script>
+const $=s=>document.querySelector(s);
+const fmt=d=>d.toLocaleDateString('pt-BR',{timeZone:'UTC'});
+const money=v=>v.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+const U=(y,m,d)=>new Date(Date.UTC(y,m,d));
+const addDays=(d,n)=>new Date(d.getTime()+n*864e5);
+const I=(id,cls='ic')=>`<svg class="${cls}"><use href="#i-${id}"/></svg>`;
+
+/* ---------- Abas e roteamento ---------- */
+const tabs=[['mapa','Mapa','map','teal'],['fluxo','Como analisar','route','blue'],['triagem','Triagem guiada','branch','violet'],['categorias','Categorias','user','coral'],['regras','Regras do escritório','book','amber'],['calculadoras','Calculadoras','calc','green'],['sistemas','Sistemas','monitor','indigo'],['glossario','Glossário','dict','pink'],['quiz','Quiz','quiz','pink'],['anotacoes','Anotações e dúvidas','note','orange']];
+$('#tabs').innerHTML=tabs.map(t=>`<a href="#${t[0]}" style="--c:var(--${t[3]})">${I(t[2])}${t[1]}</a>`).join('');
+function show(){
+  const h=(location.hash||'#mapa').slice(1);const v=tabs.some(t=>t[0]===h)?h:'mapa';
+  tabs.forEach(t=>{$('#v-'+t[0]).hidden=t[0]!==v});
+  document.querySelectorAll('#tabs a').forEach(a=>{if(a.getAttribute('href')==='#'+v){a.setAttribute('aria-current','page');a.scrollIntoView({block:'nearest',inline:'nearest'})}else a.removeAttribute('aria-current')});
+  window.scrollTo(0,0);
+}
+addEventListener('hashchange',show);
+
+/* ---------- Mapa ---------- */
+const branches=[
+  {id:'evento',t:'Evento gerador',s:'certidão, data do parto',x:150,y:80,c:'pink',i:'heart',go:'fluxo',body:'Nascimento, adoção, guarda para adoção ou aborto não criminoso. A data do evento é a referência para medir qualidade de segurada e prazos. Grávida ainda sem parto: use a DPP.',law:'Lei 8.213 art. 71 e 71-A'},
+  {id:'cnis',t:'CNIS',s:'vínculos e contribuições',x:490,y:60,c:'blue',i:'cnis',go:'fluxo',body:'Extrato do INSS com vínculos, contribuições e remunerações. Dele sai a categoria da segurada, a data de saída do último vínculo e os meses abaixo do mínimo.',law:'Decreto 3.048 art. 19'},
+  {id:'cat',t:'Categoria',s:'CLT, MEI, facultativa…',x:830,y:80,c:'coral',i:'user',go:'categorias',body:'Classifique a cliente em uma única categoria na data do parto. A categoria muda o período de graça, quem paga e o que precisa ter sido pago.',law:'Lei 8.213 arts. 11 e 13'},
+  {id:'qual',t:'Qualidade de segurada',s:'o requisito decisivo',x:870,y:270,c:'teal',i:'shield',go:'calculadoras',body:'Ela precisa estar coberta pelo INSS na data do parto: vínculo ativo, contribuição em dia ou dentro do período de graça. Desde 05/04/2024 não se exige carência, então quase tudo se resume a isso.',law:'Lei 8.213 art. 15 · IN 128 art. 200 §4º'},
+  {id:'graca',t:'Período de graça',s:'12 ou 6 meses, + MPZ',x:830,y:460,c:'green',i:'clock',go:'calculadoras',body:'Tempo em que ela mantém a qualidade sem contribuir: 12 meses após sair do emprego (podendo chegar a 24 ou 36), 6 meses para facultativa. O escritório soma 28 dias (MPZ).',law:'Lei 8.213 art. 15 · Memo-Circular 10/2011'},
+  {id:'regras',t:'Regras do escritório',s:'DARF, 4 meses, GPS',x:490,y:480,c:'amber',i:'book',go:'regras',body:'DARF só dentro de 14 meses e 28 dias antes do parto, complementação de 7,5%, CI não gera DARF, quem voltou a trabalhar até 4 meses após o parto não é "Bom" (exceto MEI), entre outras.',law:'Combinados internos'},
+  {id:'sist',t:'Sistemas',s:'planilhas, AdvBox, Tramitação',x:150,y:460,c:'indigo',i:'monitor',go:'sistemas',body:'Planilhas do Drive trazem a lista de clientes. AdvBox guarda certidão e CNIS. Tramitação Inteligente mostra a última movimentação no INSS. DataCrazy é o CRM de WhatsApp, só para leitura.',law:'Fluxo operacional'},
+  {id:'concl',t:'Conclusão',s:'3 respostas possíveis',x:110,y:270,c:'violet',i:'check',go:'fluxo',body:'Tem direito, Não tem direito ou Não é possível concluir. Sempre com justificativa citando o documento. Na dúvida, peça documento complementar.',law:'Modelo de parecer do escritório'}
+];
+function drawMap(){
+  const svg=$('#mapsvg');const cx=490,cy=270;let h='';
+  branches.forEach(b=>{h+=`<path class="edge" style="stroke:var(--${b.c})" d="M${cx} ${cy} Q ${(cx+b.x)/2} ${cy} ${b.x} ${b.y}"/>`});
+  h+=`<g><circle cx="${cx}" cy="${cy}" r="92" fill="var(--teal)" opacity=".15"/><circle cx="${cx}" cy="${cy}" r="74" fill="var(--teal)"/><text x="${cx}" y="${cy-6}" text-anchor="middle" font-size="18" font-weight="800" fill="var(--surface)">Salário-</text><text x="${cx}" y="${cy+16}" text-anchor="middle" font-size="18" font-weight="800" fill="var(--surface)">Maternidade</text><text x="${cx}" y="${cy+38}" text-anchor="middle" font-size="12" fill="var(--surface)">120 dias</text></g>`;
+  branches.forEach(b=>{const w=230,hh=64;h+=`<g class="node" style="--c:var(--${b.c})" tabindex="0" role="button" data-id="${b.id}" aria-label="${b.t}"><rect class="box" x="${b.x-w/2}" y="${b.y-hh/2}" width="${w}" height="${hh}" rx="32"/><circle class="circ" cx="${b.x-w/2+32}" cy="${b.y}" r="22"/><g transform="translate(${b.x-w/2+20} ${b.y-12})"><svg class="gl" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-${b.i}"/></svg></g><text class="tt" x="${b.x-w/2+64}" y="${b.y-3}" font-size="15">${b.t}</text><text class="sub" x="${b.x-w/2+64}" y="${b.y+16}">${b.s}</text></g>`});
+  svg.innerHTML=h;
+  svg.querySelectorAll('.node').forEach(n=>{const f=()=>pick(n.dataset.id);n.addEventListener('click',f);n.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();f()}})});
+  $('#mapcards').innerHTML=branches.map(b=>`<button type="button" data-id="${b.id}" style="--c:var(--${b.c})">${I(b.i)}${b.t}</button>`).join('');
+  $('#mapcards').querySelectorAll('button').forEach(b=>b.onclick=()=>pick(b.dataset.id));
+  pick('qual');
+}
+function pick(id){
+  const b=branches.find(x=>x.id===id);
+  document.querySelectorAll('.node,#mapcards button').forEach(n=>n.classList.toggle('sel',n.dataset.id===id));
+  const d=$('#mapdetail');d.style.setProperty('--c',`var(--${b.c})`);
+  d.innerHTML=`<span class="badge solid">${I(b.i)}</span><div><h3>${b.t}</h3><p>${b.body}</p><span class="law">${b.law}</span><div><a href="#${b.go}">Abrir a explicação completa →</a></div></div>`;
+}
+
+/* ---------- Fluxo ---------- */
+const steps=[
+  ['heart','pink','Identificar o evento gerador','Certidão de nascimento',`<p>O evento pode ser nascimento, adoção, guarda judicial para adoção ou aborto não criminoso. Na maioria dos casos é o nascimento.</p><ul class="clean"><li>Anote a <b>data do evento</b>: é a data que decide tudo.</li><li>Anote o <b>nome da mãe</b> e confira se bate com o CNIS.</li><li>Anote o <b>nome da criança</b>.</li><li>Se ainda está grávida, use a <b>DPP</b> (data provável do parto).</li></ul><div class="callout"><svg class="ic"><use href="#i-alert"/></svg><div>Certidão ilegível ou nome da mãe diferente do CNIS é inconsistência. Registre no parecer.</div></div>`],
+  ['cnis','blue','Ler o CNIS','No AdvBox costuma vir como "extrato"',`<ul class="clean"><li>Vínculos: empresa, data de início e de fim.</li><li>Contribuições como facultativa, contribuinte individual ou MEI.</li><li>Remunerações mês a mês (procure meses abaixo do salário mínimo).</li><li>Indicadores ao lado das competências, como <span class="mono">PREC-FBR</span>.</li><li>Vínculo sem data de fim: confira no GERID ou na CTPS se ainda está ativo.</li></ul>`],
+  ['user','coral','Classificar a categoria','Uma só, na data do evento',`<p>Empregada CLT, doméstica, avulsa, contribuinte individual (inclui MEI), facultativa, segurada especial (rural), desempregada em período de graça, ou sem qualidade de segurada. Se não der para identificar, diga isso.</p><p><a href="#categorias">Ver os cartões de categorias →</a></p>`],
+  ['shield','teal','Conferir os requisitos','Qualidade de segurada é o decisivo',`<ul class="clean"><li><b>Qualidade de segurada</b> na data do parto: vínculo ativo, contribuição em dia ou período de graça.</li><li><b>Carência:</b> isenta para todas as categorias em pedidos desde 05/04/2024 (STF, ADI 2.110). CI, MEI e facultativa: basta 1 contribuição válida antes do parto.</li><li><b>Período de graça:</b> calcule na <a href="#calculadoras">calculadora</a>.</li><li><b>Vínculo ativo no parto:</b> quem paga é a empresa.</li></ul><span class="law">Lei 8.213/91 arts. 15, 25, 26, 71 a 73 · Decreto 3.048/99 · IN PRES/INSS 128/2022 (red. IN 188/2025)</span>`],
+  ['search','amber','Procurar inconsistências','O que trava ou derruba o pedido',`<ul class="clean"><li>CNIS incompleto ou ausente.</li><li>Vínculo sem remuneração ou abaixo do mínimo (pode precisar de DARF).</li><li>Datas conflitantes entre CNIS, CTPS e certidão.</li><li>Certidão ilegível ou faltando.</li><li>Volta ao trabalho até 4 meses depois do parto.</li></ul>`],
+  ['check','green','Concluir','Uma de três respostas, justificada',`<div class="chips"><span class="pill p-ok">Tem direito</span><span class="pill p-bad">Não tem direito</span><span class="pill p-warn">Não é possível concluir</span></div><p>Cite o que o documento mostra: "CNIS: vínculo com Empresa X de 03/2023 a 20/01/2025; certidão: nascimento em 10/03/2026; qualidade mantida até 15/03/2026."</p><p>Para grávidas sem qualidade, o escritório usa <span class="pill p-info">Tem direito se pagar a GPS antes do parto</span>, com o prazo.</p>`]
+];
+function drawSteps(){
+  $('#road').innerHTML=steps.map((s,i)=>`<button type="button" class="st" data-i="${i}" style="--c:var(--${s[1]})"><span class="badge solid">${I(s[0])}</span>${s[2]}</button>`).join('');
+  $('#steps').innerHTML=steps.map((s,i)=>`<li><details class="step" id="step${i}" style="--c:var(--${s[1]})" ${i===0?'open':''}><summary><span class="badge">${I(s[0])}</span><div class="t"><span class="num">ETAPA ${i+1}</span><h3>${s[2]}</h3><span>${s[3]}</span></div></summary><div class="body">${s[4]}<div class="rx" data-k="step-${i}"></div></div></details></li>`).join('');
+  $('#road').querySelectorAll('.st').forEach(b=>b.onclick=()=>{const d=$('#step'+b.dataset.i);d.open=true;d.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'})});
+}
+
+/* ---------- Triagem ---------- */
+const T={
+  start:{i:'heart',q:'A criança já nasceu?',o:[['Sim, tenho a certidão','nasc'],['Não, ela está grávida','grav'],['Não tenho certidão nem DPP','semdoc']]},
+  semdoc:{r:'warn',t:'Não é possível concluir',x:'Sem a data do evento não dá para medir nada. Peça a certidão de nascimento ou, se grávida, um documento com a DPP (ultrassom, cartão da gestante).'},
+  nasc:{i:'cnis',q:'Tem o CNIS da cliente?',o:[['Sim','nasc2'],['Não, ou está ilegível','semcnis']]},
+  semcnis:{r:'warn',t:'Não é possível concluir',x:'Sem CNIS não há como saber categoria nem qualidade de segurada. Procure no AdvBox (arquivo "extrato") e, se não houver, peça o CNIS. O GERID ajuda com datas, mas não substitui o CNIS.'},
+  nasc2:{i:'building',q:'Na data do parto, ela tinha vínculo CLT ativo?',o:[['Sim, vínculo sem data de fim ou com fim depois do parto','ativo'],['Não','cat']]},
+  ativo:{r:'info',t:'Quem paga é a empresa',x:'Com vínculo ativo, o salário-maternidade é pago pela empresa (art. 72 §1º da Lei 8.213). Pedido ao INSS será indeferido. Exceção: se ela também tinha MEI ou CI em dia, pode haver benefício pela outra atividade.'},
+  cat:{i:'user',q:'Qual era a situação dela na data do parto?',o:[['Ex-CLT, saiu do emprego antes do parto','desemp'],['MEI ou contribuinte individual','ci'],['Facultativa','fac'],['Doméstica ou avulsa com vínculo','dom'],['Trabalhadora rural (segurada especial)','rural'],['Nunca contribuiu','nunca']]},
+  desemp:{i:'clock',q:'O parto foi dentro do período de graça? (use a calculadora, com MPZ)',o:[['Sim','desemp_ok'],['Não, a qualidade acabou antes do parto','desemp_no']]},
+  desemp_ok:{i:'money',q:'Há remuneração abaixo do mínimo dentro de 14 meses e 28 dias antes do parto?',o:[['Não','ok_mgr'],['Sim','ok_darf']]},
+  ok_mgr:{r:'ok',t:'Tem direito',x:'Desempregada em período de graça: o INSS paga direto (Decreto 3.048 art. 97, parágrafo único; Memorando 44/2017, o "MGR"). Cite no parecer a data de saída, o último dia de qualidade e a data do parto.',fim:1},
+  ok_darf:{r:'ok',t:'Tem direito, com DARF',x:'Gerar DARF de complementação (código 1872) para as competências dentro do prazo: (salário mínimo − remuneração) × 7,5%. O prazo é de 14 meses e 28 dias, ou de 2 anos se ela recebeu seguro-desemprego (pago) do último vínculo. Valor abaixo de R$ 10,00 não se emite; escolha outra competência.',fim:1},
+  desemp_no:{r:'bad',t:'Não tem direito (via administrativa)',x:'O parto aconteceu depois de acabar a qualidade de segurada. Confira antes se cabe prorrogação: mais de 120 contribuições sem perda (+12 meses) ou desemprego registrado (+12 meses). Se não couber, leve ao advogado para avaliar o judicial.'},
+  ci:{i:'bag',q:'Existe contribuição válida?',o:[['Sim, paga antes do parto, mantendo a qualidade','ci_ok'],['Paga a competência do mês do parto até o vencimento (dia 15 do mês seguinte)','ci_ok'],['Só pagou depois do vencimento, ou não pagou','ci_no']]},
+  ci_ok:{r:'ok',t:'Tem direito',x:'MEI e CI precisam de 1 contribuição válida (IN 188/2025). Pela regra do escritório, vale também a competência do mês do parto paga até o vencimento. Contribuinte individual não gera DARF. MEI não entra na regra dos 4 meses.'},
+  ci_no:{r:'bad',t:'Não tem direito (via administrativa)',x:'Contribuição paga depois do vencimento não vale. Leve ao advogado para avaliar o judicial.'},
+  fac:{i:'coin',q:'Quando ela pagou como facultativa?',o:[['Antes do parto, e o parto foi dentro de 6 meses da última contribuição','fac_ok'],['Só depois do parto','fac_no']]},
+  fac_ok:{i:'cnis',q:'O CNIS mostra PREC-FBR (baixa renda não validada)?',o:[['Não','fac_ok2'],['Sim','fac_fbr']]},
+  fac_ok2:{r:'ok',t:'Tem direito',x:'Facultativa com pagamento antes do parto e qualidade mantida (graça de 6 meses).',fim:1},
+  fac_fbr:{r:'ok',t:'Tem direito, com complementação',x:'Baixa renda (5%) não validada no CadÚnico: complementar para 11% (diferença de 6% do mínimo por competência). Não usar a regra dos 7,5%.',fim:1},
+  fac_no:{r:'bad',t:'Judicial',x:'Facultativa que pagou depois do parto: o INSS indefere. Pela regra do escritório o caso vai para o Judicial, nunca para "Bom".'},
+  dom:{r:'ok',t:'Provável direito, INSS paga direto',x:'Doméstica e avulsa recebem direto do INSS e não têm carência. Confira o vínculo na data do parto no CNIS.',fim:1},
+  rural:{r:'warn',t:'Leve ao advogado',x:'Segurada especial precisa provar atividade rural. O escritório ainda não definiu se segue 1 mês (CRPS, Enunciado 19) ou 10 meses (Decreto art. 93 §2º). Processo rural fraco é considerado ruim.'},
+  nunca:{r:'bad',t:'Não tem direito',x:'O parto já aconteceu sem nenhuma contribuição válida antes. Não existe qualidade de segurada. Se ela ainda estivesse grávida, a orientação seria pagar GPS antes do parto.'},
+  grav:{i:'building',q:'Ela está trabalhando com carteira assinada agora?',o:[['Sim','grav_clt'],['Não','grav2']]},
+  grav_clt:{r:'info',t:'Empresa vai pagar',x:'Se continuar empregada até o parto, quem paga é a empresa. Se for demitida antes do parto, refaça a análise como desempregada em período de graça.'},
+  grav2:{i:'calendar',q:'A qualidade de segurada dela vai até a DPP? (use a calculadora, com MPZ)',o:[['Sim, cobre a DPP','grav_ok'],['Não, termina antes da DPP','grav_gps']]},
+  grav_ok:{r:'ok',t:'Com qualidade',x:'Ela tem direito se o parto acontecer até o último dia de qualidade. Anote esse dia na planilha. No AdvBox costuma aparecer como "NÃO PAGAR GPS / DENTRO DO PRAZO".'},
+  grav_gps:{r:'info',t:'Tem direito se pagar a GPS antes do parto',x:'Grávida sem qualidade não é "não tem direito". Classifique como "Tem direito se pagar a GPS antes do parto", informe o prazo e ordene a lista por DPP. GPS facultativa 2026: R$ 178,31. No AdvBox aparece como "PAGAR GPS".'}
+};
+const rIcon={ok:'check',bad:'x',warn:'alert',info:'money'};
+let path=[];
+function wiz(id){
+  const n=T[id];const box=$('#wiz');
+  const crumbs=path.length?`<div class="crumbs">${path.map(p=>`<span>${p}</span>`).join('')}</div>`:'';
+  if(n.q){
+    box.innerHTML=crumbs+`<div class="q"><span class="badge">${I(n.i)}</span>${n.q}</div><div class="opts">${n.o.map((o,i)=>`<button class="btn" data-i="${i}">${o[0]}</button>`).join('')}</div>${path.length?'<div><button class="btn" id="wreset">Recomeçar</button></div>':''}`;
+    box.querySelectorAll('.opts button').forEach(b=>b.onclick=()=>{const o=n.o[+b.dataset.i];path.push(o[0]);wiz(o[1])});
+  }else{
+    const extra=n.fim?`<div class="callout"><svg class="ic"><use href="#i-alert"/></svg><div><b>Antes de marcar como "Bom":</b> ela voltou a trabalhar até 4 meses depois do parto? Se sim (e não for MEI), não classifique como "Bom".</div></div>`:'';
+    box.innerHTML=crumbs+`<div class="result ${n.r}"><span class="badge solid">${I(rIcon[n.r])}</span><div><h3>${n.t}</h3><p>${n.x}</p></div></div>${extra}<div><button class="btn primary" id="wreset">Fazer outra triagem</button></div>`;
+  }
+  const r=$('#wreset');if(r)r.onclick=()=>{path=[];wiz('start')};
+}
+
+/* ---------- Categorias ---------- */
+const cats=[
+  ['Empregada CLT','building','blue','Vínculo com empresa (CNPJ), remuneração mensal','Nada além do vínculo; sem carência','12 meses após a saída (+12 com 120 contribuições, +12 com desemprego registrado)','Empresa, se ativa no parto','Remuneração abaixo do mínimo → DARF (7,5%)'],
+  ['Desempregada em graça','exit','teal','Último vínculo encerrado antes do parto','Parto dentro do período de graça','Conta a partir da saída do emprego','INSS (MGR)','É o caso mais comum do escritório'],
+  ['Doméstica','house','pink','Vínculo com empregador pessoa física','Vínculo na data do parto','12 meses após a saída','INSS','Sem carência'],
+  ['Trabalhadora avulsa','anchor','indigo','Vínculo por sindicato ou OGMO','Vínculo na data do parto','12 meses','INSS','Rara na nossa carteira'],
+  ['MEI','bag','amber','Recolhimentos "MEI" (5% do mínimo) com CNPJ','1 contribuição antes do parto, ou a do mês do parto paga até o vencimento','12 meses','INSS','Não gera DARF; fora da regra dos 4 meses'],
+  ['Contribuinte individual','pen','violet','Recolhimentos "CI" de 11% ou 20%','1 contribuição válida + prova de atividade','12 meses','INSS','Não gera DARF'],
+  ['Facultativa','coin','green','Recolhimentos "facultativo", 11% ou 5% baixa renda','Pagamento antes do parto','6 meses','INSS','Pagou depois do parto → Judicial. PREC-FBR → complementar para 11%'],
+  ['Segurada especial','leaf','green','Pouco ou nada no CNIS; prova documental','Atividade rural antes do parto','Enquanto houver atividade rural','INSS','Critério de 1 ou 10 meses ainda não definido: leve ao advogado'],
+  ['Sem qualidade','x','coral','Último registro antigo, graça vencida','Grávida: pagar GPS antes do parto','Não se aplica','Ninguém, até regularizar','Grávida → "Tem direito se pagar a GPS"; já nasceu → não tem direito']
+];
+let catSel=null;
+function drawCats(){
+  $('#catfilter').innerHTML=[['Todas',null,'coral'],...cats.map(c=>[c[0],c[1],c[2]])].map(n=>`<button type="button" data-c="${n[0]}" style="--c:var(--${n[2]})" class="${(catSel||'Todas')===n[0]?'on':''}">${n[0]}</button>`).join('');
+  $('#catfilter').querySelectorAll('button').forEach(b=>b.onclick=()=>{catSel=b.dataset.c==='Todas'?null:b.dataset.c;drawCats()});
+  $('#catcards').innerHTML=cats.filter(c=>!catSel||c[0]===catSel).map(c=>`<article class="cat" style="--c:var(--${c[2]})"><div class="top"><span class="badge">${I(c[1])}</span><div><h3>${c[0]}</h3><span class="who">${I(c[6].startsWith('Empresa')?'building':c[6].startsWith('Ninguém')?'x':'shield')} ${c[6]}</span></div></div><dl><div><dt>Como aparece no CNIS</dt><dd>${c[3]}</dd></div><div><dt>O que precisa</dt><dd>${c[4]}</dd></div><div><dt>Período de graça</dt><dd>${c[5]}</dd></div><div><dt>Atenção</dt><dd>${c[7]}</dd></div><div class="rx" data-k="cat-${cats.indexOf(c)}"></div></dl></article>`).join('');
+  renderRx();
+}
+
+/* ---------- Regras ---------- */
+const rules=[
+  ['check','violet','CONCLUSÃO','Três respostas, sempre justificadas','Tem direito, Não tem direito ou Não é possível concluir. Cite o documento. Nunca presuma; na dúvida, peça documento.'],
+  ['clock','teal','PRAZO','Como calcular o fim da qualidade','Data de saída + 12 meses → mês seguinte → dia 15 do mês posterior = último dia com qualidade. Com MPZ, + 28 dias. Ex.: saída 20/01/2025 → 15/03/2026 → com MPZ 12/04/2026.'],
+  ['money','green','DARF','Só dentro de 14 meses e 28 dias antes do parto','Competência + 14 meses, dia 15, + 28 dias tem que alcançar a data do parto. Valor = (salário mínimo − remuneração do CNIS) × 7,5%, código 1872. Mínimo de R$ 10,00 por guia.'],
+  ['shield','teal','SEGURO-DESEMPREGO','Recebeu seguro? O prazo é de 2 anos','Se a cliente recebeu seguro-desemprego do último vínculo antes do parto, e ele foi efetivamente pago, o prazo é de 2 anos, e não de 14 meses e 28 dias. Confira o comprovante no AdvBox (arquivo "seguro desemprego").'],
+  ['pen','violet','CI','Contribuinte individual não gera DARF','A complementação de 7,5% é só para remuneração de empregada abaixo do mínimo.'],
+  ['calendar','coral','4 MESES','Voltou a trabalhar? Não é "Bom"','Se a cliente voltou a trabalhar dentro de 4 meses depois do parto, não classifique como "Bom". A exceção é a MEI.'],
+  ['bag','amber','MEI/CI','Competência do mês do parto vale se paga no prazo','Parto em 10/10/2026 → competência 10/2026 paga até o vencimento (dia 15 do mês seguinte ou próximo dia útil). Paga depois do vencimento não vale.'],
+  ['scale','blue','FACULTATIVA','Pagou depois do parto vai para o Judicial','Facultativa não segue a regra do mês do parto. O INSS indefere; classifique como Judicial.'],
+  ['heart','pink','GRÁVIDA','Sem qualidade não é "não tem direito"','Classifique como "Tem direito se pagar a GPS antes do parto", com o prazo, e ordene por DPP. "Não tem direito" fica para quem já teve o filho sem GPS válida ou perdeu o bebê.'],
+  ['building','indigo','VÍNCULO ATIVO','Empregada no parto: empresa paga','O INSS indefere. Confirme no GERID ou na CTPS se o vínculo sem data de fim está mesmo ativo.'],
+  ['alert','amber','RUINS','Processos considerados fracos','SINE, rural fraco e "tentativa". Sinalize na planilha.'],
+  ['lock','coral','SIGILO','Senhas e dados das clientes','Nunca use senha gov.br/Meu INSS das planilhas ou notas. Não copie dados de cliente para fora dos sistemas do escritório.']
+];
+function drawRules(){
+  $('#rules').innerHTML=rules.map(r=>`<div class="card rule" style="--c:var(--${r[1]})"><span class="badge">${I(r[0])}</span><div class="stack"><span class="tag">${r[2]}</span><h3>${r[3]}</h3><p>${r[4]}</p><div class="rx" data-k="rule-${rules.indexOf(r)}"></div></div></div>`).join('');
+}
+
+/* ---------- Linha do tempo ---------- */
+function timeline(svg,pts){
+  // pts: [{d:Date,label,color,kind:'start'|'mark'|'pin'}], segs between consecutive non-pin points colored by the later point
+  const ds=pts.map(p=>p.d.getTime());const min=Math.min(...ds),max=Math.max(...ds);const span=Math.max(max-min,864e5);
+  const X=t=>30+(t-min)/span*580;const y=58;let h='';
+  h+=`<line x1="30" y1="${y}" x2="610" y2="${y}" stroke="var(--line)" stroke-width="10" stroke-linecap="round"/>`;
+  const line=pts.filter(p=>p.kind!=='pin').sort((a,b)=>a.d-b.d);
+  for(let i=1;i<line.length;i++)h+=`<line x1="${X(line[i-1].d)}" y1="${y}" x2="${X(line[i].d)}" y2="${y}" stroke="var(--${line[i].color})" stroke-width="10" stroke-linecap="round"/>`;
+  const placed=[];
+  pts.slice().sort((a,b)=>a.d-b.d).forEach(p=>{const x=X(p.d);
+    if(p.kind==='pin'){h+=`<path d="M${x} ${y-8} l-9 -16 a10 10 0 1 1 18 0 z" fill="var(--${p.color})"/><circle cx="${x}" cy="${y-30}" r="4" fill="var(--surface)"/>`;}
+    else h+=`<circle cx="${x}" cy="${y}" r="8" fill="var(--surface)" stroke="var(--${p.color})" stroke-width="4"/>`;
+    const up=p.kind==='pin';let ly=up?18:88;
+    // evita sobreposição de rótulos
+    const clash=placed.filter(q=>q.up===up&&Math.abs(q.x-x)<120).length;if(!up)ly+=clash*28;
+    placed.push({x,up,ly});
+    const anchor=x<80?'start':x>560?'end':'middle';
+    h+=`<text x="${x}" y="${ly}" text-anchor="${anchor}" font-weight="700">${p.label}</text><text class="lbl" x="${x}" y="${ly+13}" text-anchor="${anchor}">${fmt(p.d)}</text>`;
+  });
+  svg.setAttribute('viewBox',`0 0 640 ${Math.max(...placed.map(q=>q.ly))+22}`);
+  svg.innerHTML=h;
+}
+
+/* ---------- Calculadoras ---------- */
+function parseDate(v){if(!v)return null;const [y,m,d]=v.split('-').map(Number);return U(y,m-1,d)}
+function calcQ(){
+  const s=parseDate($('#q-saida').value);const g=+$('#q-graca').value;const mpz=$('#q-mpz').checked;const p=parseDate($('#q-parto').value);
+  if(!s){$('#q-out').innerHTML='Informe a data de saída.';$('#q-tl').innerHTML='';return}
+  const base=U(s.getUTCFullYear(),s.getUTCMonth()+g+2,15);const fim=mpz?addDays(base,28):base;
+  const pts=[{d:s,label:'Saída',color:'teal',kind:'start'},{d:base,label:'Dia 15',color:'teal',kind:'mark'}];
+  if(mpz)pts.push({d:fim,label:'MPZ',color:'violet',kind:'mark'});
+  if(p)pts.push({d:p,label:'Parto',color:p<=fim?'green':'coral',kind:'pin'});
+  timeline($('#q-tl'),pts);
+  let h=`<div>Último dia com qualidade${mpz?' (com MPZ)':''}</div><div class="big">${fmt(fim)}</div><div class="hint">${fmt(s)} + ${g} meses → mês seguinte → dia 15 = ${fmt(base)}${mpz?' → + 28 dias':''}</div>`;
+  if(p){h+=p<=fim?`<div><span class="pill p-ok">Parto dentro da qualidade</span> ${fmt(p)} ≤ ${fmt(fim)}</div>`:`<div><span class="pill p-bad">Parto fora da qualidade</span> ${fmt(p)} > ${fmt(fim)}</div>`}
+  $('#q-out').innerHTML=h;
+}
+function parseComp(v){const t=(v||'').trim();let m=t.match(/^(\d{1,2})\s*[\/\-]\s*(\d{4})$/);if(m)return +m[1]>=1&&+m[1]<=12?{y:+m[2],m:+m[1]-1}:null;m=t.match(/^(\d{4})-(\d{1,2})$/);if(m)return +m[2]>=1&&+m[2]<=12?{y:+m[1],m:+m[2]-1}:null;return null}
+const seg2=()=>$('#d-seguro')&&$('#d-seguro').checked;
+const compLim=c=>seg2()?U(c.y+2,c.m+1,0):addDays(U(c.y,c.m+14,15),28);
+const compTxt=c=>String(c.m+1).padStart(2,'0')+'/'+c.y;
+function calcD(){
+  const p=parseDate($('#d-parto').value);const c=parseComp($('#d-comp').value);const rem=+$('#d-rem').value||0;const sm=+$('#d-sm').value||0;
+  if(!p||!c){$('#d-out').innerHTML='Informe a data do parto e a competência no formato MM/AAAA.';$('#d-tl').innerHTML='';return}
+  const lim=compLim(c);const dentro=lim>=p;
+  let k={y:p.getUTCFullYear(),m:p.getUTCMonth()};for(let i=0;i<24;i++){const prev={y:k.m===0?k.y-1:k.y,m:k.m===0?11:k.m-1};if(compLim(prev)>=p)k=prev;else break}
+  timeline($('#d-tl'),seg2()?[{d:U(c.y,c.m,1),label:'Competência '+compTxt(c),color:'violet',kind:'start'},{d:lim,label:'+2 anos (seguro)',color:'teal',kind:'mark'},{d:p,label:'Parto',color:dentro?'green':'coral',kind:'pin'}]:[{d:U(c.y,c.m,1),label:'Competência '+compTxt(c),color:'violet',kind:'start'},{d:U(c.y,c.m+14,15),label:'+14 meses, dia 15',color:'violet',kind:'mark'},{d:lim,label:'+28 dias',color:'amber',kind:'mark'},{d:p,label:'Parto',color:dentro?'green':'coral',kind:'pin'}]);
+  let h=`<div>Prazo da competência ${compTxt(c)}${seg2()?' (2 anos, seguro-desemprego)':''}: <span class="mono">${fmt(lim)}</span></div>`;
+  h+=dentro?`<div><span class="pill p-ok">Dentro do prazo</span> alcança o parto de ${fmt(p)}</div>`:`<div><span class="pill p-bad">Fora do prazo</span> não gera DARF</div>`;
+  h+=`<div class="hint">Para este parto, a competência mais antiga aceita é <b>${compTxt(k)}</b>.</div>`;
+  if(dentro){const v=Math.max(0,sm-rem)*0.075;h+=`<div>Valor da DARF (código 1872)</div><div class="big">${money(v)}</div><div class="hint">(${money(sm)} − ${money(rem)}) × 7,5%</div>`;
+    if(rem>=sm)h+=`<div><span class="pill p-info">Sem complementação</span> a remuneração já atinge o mínimo</div>`;else if(v<10)h+=`<div><span class="pill p-warn">Abaixo de R$ 10,00</span> não se emite; escolha outra competência</div>`}
+  $('#d-out').innerHTML=h;
+}
+
+/* ---------- Sistemas ---------- */
+const systems=[
+  ['Planilhas do Google Drive','De onde vem a lista de clientes','sheet','green',[['Relatório Diário Comercial','Aba da vendedora','Semana e dia']],['Uma aba por vendedora; cada dia tem colunas de clientes e de grávidas.','"Tipo de processo": Bom, Judicial, Rural, Trabalhista, Tentativa, Bpc.','As colunas Contou, Pendências e Observações são da conferência: é você quem preenche.','A planilha não traz CNIS nem certidão.']],
+  ['AdvBox','Onde ficam certidão e CNIS','cloud','blue',[['Contatos','Buscar pelo nome','Clicar no nome','Ícone de nuvem']],['A busca só acha por nome, não por CPF. Se não achar, tente primeiro nome + um sobrenome.','Há homônimos: confira sempre o CPF.','Cuidado: o ícone de pasta na linha abre "Criar novo processo". Feche sem salvar.','Arquivos típicos: "certidão", "extrato" (CNIS), "GERID", "DARF", "NOSSO PROTOCOLO".','Etiquetas: "PAGAR GPS" = sem qualidade; "NÃO PAGAR GPS / DENTRO DO PRAZO" = com qualidade; "GRÁVIDA GPS REGISTRADA" = CLT.']],
+  ['Tramitação Inteligente','Andamento do pedido no INSS','mail','violet',[['Pesquisar','Clientes','CPF','Abrir','E-mail exclusivo']],['Use quando o AdvBox não resolve o caso.','Buscar por CPF é o caminho mais rápido.','Os e-mails são avisos do INSS. "Concluída" não diz o resultado: abra e leia o despacho (concedido ou indeferido, número do benefício).']],
+  ['DataCrazy (CRM)','Histórico de atendimento por WhatsApp','chat','pink',[['Pesquise seus contatos','Trecho do nome sem acento']],['Só leitura: nunca envie mensagem, não clique em "Finalizar" nem em "Marcar como lido".','A busca é por trecho do nome. Tente nome completo, depois os 2 primeiros nomes, depois os 2 últimos sobrenomes.','Alguns cadastros têm o nome da vendedora no fim (ex.: "… - hellen").']]
+];
+function drawSystems(){
+  $('#sysflow').innerHTML=systems.map((s,i)=>`${i?'<span class="arrow">→</span>':''}<span class="fstep" style="--c:var(--${s[3]})"><span class="badge solid">${I(s[2])}</span>${s[0].replace(' do Google Drive','')}</span>`).join('');
+  $('#systems').innerHTML=systems.map(s=>`<div class="sys" style="--c:var(--${s[3]})"><div class="top"><span class="badge">${I(s[2])}</span><div><div class="eyebrow">${s[1]}</div><h3>${s[0]}</h3></div></div><div class="bd">${s[4].map(p=>`<div class="path">${p.map((x,i)=>(i?'<i>›</i>':'')+`<b>${x}</b>`).join('')}</div>`).join('')}<ul class="clean">${s[5].map(x=>`<li>${x}</li>`).join('')}</ul></div></div>`).join('');
+}
+
+/* ---------- Glossário ---------- */
+const gc=['teal','blue','violet','pink','coral','amber','green','indigo'];
+const gloss=[
+  ['CNIS','Cadastro Nacional de Informações Sociais. Extrato com vínculos, contribuições e remunerações. No AdvBox costuma estar como "extrato".'],
+  ['GERID','Print de vínculos do sistema do INSS. Rápido para conferir datas de entrada e saída.'],
+  ['DPP','Data provável do parto. Usada para grávidas.'],
+  ['Qualidade de segurada','Estar coberta pelo INSS. Mantida por vínculo ativo, contribuição ou período de graça.'],
+  ['Período de graça','Tempo em que a qualidade continua sem contribuir: 12 meses (empregada, CI, MEI), 6 meses (facultativa), até 36 com prorrogações.'],
+  ['Carência','Número mínimo de contribuições. Para salário-maternidade, isenta em pedidos desde 05/04/2024.'],
+  ['Competência','Mês a que a contribuição se refere. Ex.: competência 10/2026 vence em 16/11/2026 (o dia 15 caiu num domingo).'],
+  ['Fato gerador','O evento que dá direito ao benefício: parto, adoção, guarda ou aborto não criminoso.'],
+  ['MPZ','Mais 28 dias no fim do prazo de qualidade (Memorando-Circular 10/2011).'],
+  ['MGR','Saiu grávida do emprego e o INSS paga direto (Memorando-Circular Conjunto 44/2017).'],
+  ['DARF','Guia de complementação para remuneração de empregada abaixo do mínimo: 7,5% da diferença, código 1872.'],
+  ['GPS','Guia da Previdência Social. Para grávida sem qualidade: GPS facultativa de 11% do mínimo, paga antes do parto.'],
+  ['PREC-FBR','Indicador no CNIS de facultativa baixa renda (5%) não validada no CadÚnico. Corrige complementando para 11%.'],
+  ['CI','Contribuinte individual (autônoma). Não gera DARF.'],
+  ['MEI','Microempreendedora individual. Precisa de 1 contribuição válida. Fica fora da regra dos 4 meses.'],
+  ['Facultativa','Quem contribui sem exercer atividade remunerada (ex.: dona de casa). Precisa pagar antes do parto.'],
+  ['Segurada especial','Trabalhadora rural em regime de economia familiar. Prova por documentos de atividade rural.'],
+  ['Bom','Classificação de processo com boa chance na via administrativa.'],
+  ['Judicial','Caso que só deve ser resolvido na Justiça (ex.: facultativa que pagou depois do parto).'],
+  ['Tentativa','Processo fraco, protocolado como tentativa. Considerado ruim.'],
+  ['Seguro-desemprego','Se a cliente recebeu (e foi pago) seguro-desemprego do último vínculo antes do parto, o prazo da DARF passa a ser de 2 anos.'],
+  ['NB','Número do benefício. Aparece no despacho de concessão.'],
+  ['Exigência','Pedido do INSS por documento ou correção durante a análise do requerimento.']
+];
+function drawGloss(f=''){
+  const norm=s=>s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');const q=norm(f.trim());
+  const items=gloss.map((g,i)=>[...g,gc[i%gc.length]]).filter(g=>!q||norm(g[0]+' '+g[1]).includes(q));
+  $('#gloss').innerHTML=items.length?items.map(g=>`<div style="--c:var(--${g[2]})"><dt>${g[0]}</dt><dd>${g[1]}</dd></div>`).join(''):'<div style="--c:var(--muted)"><dt>Nada encontrado</dt><dd>Tente outra palavra ou a sigla.</dd></div>';
+}
+
+/* ---------- Quiz ---------- */
+const quiz=[
+  {q:'Parto em 10/03/2026. O CNIS mostra um único vínculo CLT que terminou em 20/01/2025. Nada depois. Qual a conclusão?',o:['Tem direito, INSS paga','Não tem direito','Empresa paga'],a:0,w:'Saída 20/01/2025 + 12 meses = 01/2026 → mês seguinte 02/2026 → dia 15 de 03/2026. Qualidade até 15/03/2026 (ou 12/04/2026 com MPZ). O parto em 10/03 está dentro: desempregada em graça, INSS paga (MGR).'},
+  {q:'MEI, parto em 10/10/2026. Pagou a competência 10/2026 em 20/11/2026. Antes disso, nada. Vale?',o:['Vale, é a competência do mês do parto','Não vale, foi paga depois do vencimento','Vale com DARF'],a:1,w:'A competência 10/2026 vence em 16/11/2026 (o dia 15 caiu num domingo). Paga em 20/11 está fora do prazo, então não vale.'},
+  {q:'Facultativa fez a primeira contribuição uma semana depois do parto. Como classificar?',o:['Bom','Tentativa','Judicial'],a:2,w:'Facultativa não segue a regra do mês do parto. Paga depois do parto, o INSS indefere: o escritório classifica como Judicial.'},
+  {q:'Grávida, DPP 20/01/2027. Último vínculo CLT terminou em 05/06/2025. Classificação?',o:['Com qualidade','Tem direito se pagar a GPS antes do parto','Não tem direito'],a:1,w:'Qualidade até 15/08/2026, com MPZ até 12/09/2026. Acaba antes da DPP. Grávida sem qualidade não é "não tem direito": orientar GPS facultativa antes do parto.'},
+  {q:'Parto em 05/05/2026. O CNIS mostra vínculo CLT de 2023 sem data de fim, e o GERID confirma que está ativo. Quem paga?',o:['INSS','Empresa','Ninguém'],a:1,w:'Vínculo ativo na data do parto: a empresa paga (art. 72 §1º da Lei 8.213). O INSS indeferiria.'},
+  {q:'No AdvBox há só a certidão de nascimento. Não há CNIS nem GERID. O que concluir?',o:['Tem direito','Não é possível concluir','Não tem direito'],a:1,w:'Sem CNIS não dá para saber categoria nem qualidade. Nunca presuma: peça o CNIS.'},
+  {q:'Parto em 15/04/2026. A competência 12/2024 tem remuneração abaixo do mínimo. Gera DARF?',o:['Sim','Não, está fora do prazo'],a:1,w:'12/2024 + 14 meses = 02/2026, dia 15 = 15/02/2026, + 28 dias = 15/03/2026. Não alcança 15/04/2026. A mais antiga aceita para esse parto é 02/2025.'},
+  {q:'Mesmo caso anterior (parto 15/04/2026, competência 12/2024 abaixo do mínimo), mas ela recebeu seguro-desemprego do último vínculo e ele foi pago. Gera DARF?',o:['Sim, o prazo passa a ser de 2 anos','Não, continua fora do prazo'],a:0,w:'Regra do escritório: com seguro-desemprego pago do último vínculo, o prazo é de 2 anos, e não 14 meses e 28 dias. 12/2024 + 2 anos alcança o parto de 15/04/2026.'},
+  {q:'Cliente tem direito e voltou a trabalhar com carteira assinada 2 meses depois do parto. Pode marcar como "Bom"?',o:['Sim','Não'],a:1,w:'Regra do escritório: voltou a trabalhar dentro de 4 meses após o parto (exceto MEI) não é "Bom".'},
+  {q:'Contribuinte individual com contribuições abaixo do mínimo. Gerar DARF de 7,5%?',o:['Sim','Não'],a:1,w:'Contribuinte individual não gera DARF. A complementação de 7,5% é para remuneração de empregada.'}
+];
+let qi=0,score=0,hist=[];
+function dots(){return `<div class="dots">${quiz.map((_,i)=>`<span class="${hist[i]===true?'r':hist[i]===false?'w':''}${i===qi?' c':''}"></span>`).join('')}</div>`}
+function drawQuiz(){
+  const box=$('#quizbox');
+  if(qi>=quiz.length){const all=score===quiz.length;box.innerHTML=`<div class="result ${all?'ok':score>=6?'info':'warn'}"><span class="badge solid">${I(all?'check':'quiz')}</span><div><h3>${score} de ${quiz.length} acertos</h3><p>${all?'Perfeito. Você está pronta para conferir casos reais com o advogado.':'Revise as regras dos casos em vermelho e tente de novo.'}</p></div></div>${dots()}<div><button class="btn primary" id="qrestart">Refazer o quiz</button></div>`;$('#qrestart').onclick=()=>{qi=0;score=0;hist=[];drawQuiz()};return}
+  const c=quiz[qi];
+  box.innerHTML=`<div class="crumbs"><span>Caso ${qi+1} de ${quiz.length}</span><span>${score} acerto(s)</span></div>${dots()}<h3>${c.q}</h3><div class="ans">${c.o.map((o,i)=>`<button data-i="${i}">${o}</button>`).join('')}</div><div id="qfb"></div>`;
+  box.querySelectorAll('.ans button').forEach(b=>b.onclick=()=>{
+    const i=+b.dataset.i;const ok=i===c.a;if(ok)score++;hist[qi]=ok;
+    box.querySelectorAll('.ans button').forEach((x,j)=>{x.disabled=true;if(j===c.a)x.classList.add('right');else if(j===i)x.classList.add('wrong')});
+    $('#qfb').innerHTML=`<div class="result ${ok?'ok':'bad'}"><span class="badge solid">${I(ok?'check':'x')}</span><div><h3>${ok?'Certo!':'Não é bem assim'}</h3><p>${c.w}</p></div></div><div style="margin-top:10px"><button class="btn primary" id="qnext">${qi+1<quiz.length?'Próximo caso':'Ver resultado'}</button></div>`;
+    $('#qnext').onclick=()=>{qi++;drawQuiz()};
+  });
+}
+
+/* ---------- Anotações, dúvidas e reações ---------- */
+const REACTS=[['entendi','👍','Entendi'],['confuso','🤔','Confuso'],['importante','⭐','Importante']];
+const S={mode:'loading',me:null,owner:false,notes:[],rx:[],names:{},filter:'abertas',slow:false,err:null};
+let DB=null,USER=null;
+const esc=t=>String(t??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function lsGet(k,d){try{const v=JSON.parse(localStorage.getItem(k));return v??d}catch(e){return d}}
+function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+function secOf(k){if(k.startsWith('sec-'))return k.slice(4);if(k.startsWith('step-'))return 'fluxo';if(k.startsWith('rule-'))return 'regras';if(k.startsWith('cat-'))return 'categorias';return k}
+function tabName(id){const t=tabs.find(x=>x[0]===id);return t?t[1]:'Geral'}
+function itemLabel(k){const i=+k.split('-')[1];if(k.startsWith('step-'))return 'Etapa '+(i+1)+': '+steps[i][2];if(k.startsWith('rule-'))return 'Regra: '+rules[i][3];if(k.startsWith('cat-'))return 'Categoria: '+cats[i][0];return 'Aba '+tabName(secOf(k))}
+function who(id,nome){if(id&&id===S.me)return 'Você';return nome||(id&&!String(id).startsWith('d')?id:'')||'Alguém'}
+function when(t){try{return new Date(t).toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})}catch(e){return ''}}
+let toastT;function toast(m){const t=$('#toast');t.textContent=m;t.hidden=false;clearTimeout(toastT);toastT=setTimeout(()=>t.hidden=true,2600)}
+function saveLocal(){lsSet('trilha-notas',S.notes);lsSet('trilha-reacoes',S.rx)}
+async function resolveNames(){if(!USER)return;const ids=[...new Set(S.notes.flatMap(n=>[n.autor,n.respAutor]).filter(x=>x&&x!==S.me&&!(x in S.names)))];if(!ids.length)return;try{const ps=await USER.profiles(ids);ids.forEach(id=>{S.names[id]=(ps&&ps[id]&&ps[id].name)||''});renderNotes()}catch(e){}}
+/* Endereço do script da Planilha Google (Implantar > App da Web). Cole entre as aspas. */
+const SCRIPT_URL='https://script.google.com/macros/s/AKfycbxUDMkAPCA2n4qhcBS7CbC40M7YqKN4T9A36vx3MBs9GSBicG6oeFZ27Wl4HRIb4ncp/exec';
+function devId(){let v=lsGet('trilha-dev','');if(!v){v='d'+Math.random().toString(36).slice(2,10);lsSet('trilha-dev',v)}return v}
+async function api(body){const r=await fetch(SCRIPT_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(body)});const j=await r.json();if(!j.ok)throw new Error(j.erro||'erro');return j}
+async function pull(){try{const r=await fetch(SCRIPT_URL);const j=await r.json();S.notes=j.notas||[];S.rx=j.reacoes||[];S.err=null;S.slow=false}catch(e){S.slow=true}renderRx();renderNotes()}
+async function initStore(){
+  S.me=devId();S.owner=true;
+  if(SCRIPT_URL){S.mode='db';await pull();setInterval(()=>{if(!document.hidden)pull()},30000)}
+  else{S.mode='local';S.notes=lsGet('trilha-notas',[]);S.rx=lsGet('trilha-reacoes',[]);renderRx();renderNotes()}
+}
+async function addNote(n){
+  let nome=lsGet('trilha-nome','');
+  const doc={tipo:n.tipo,secao:n.secao,trecho:n.trecho||'',texto:n.texto,autor:S.me,autorNome:nome,criadoEm:Date.now(),resolvida:false,resposta:'',respAutor:''};
+  if(S.mode==='db'){await api({acao:'add',nota:doc});await pull()}else{S.notes.unshift(Object.assign({id:'l'+Date.now()},doc));saveLocal();renderNotes()}
+}
+async function updNote(id,patch){if(patch.respAutor)patch.respAutor=lsGet('trilha-nome','')||'Advogado';if(S.mode==='db'){await api({acao:'update',id,patch});await pull()}else{const n=S.notes.find(x=>x.id===id);Object.assign(n,patch);saveLocal();renderNotes()}}
+async function delNote(id){if(S.mode==='db'){await api({acao:'delete',id});await pull()}else{S.notes=S.notes.filter(x=>x.id!==id);saveLocal();renderNotes()}}
+async function toggleRx(k,e){
+  if(S.mode==='loading')return;
+  const id=k+'__'+e+'__'+S.me;const ex=S.rx.find(r=>r.id===id);
+  if(ex)S.rx=S.rx.filter(r=>r.id!==id);else S.rx.push({id,item:k,emoji:e,autor:S.me,em:Date.now()});renderRx();renderNotes();
+  if(S.mode==='db'){try{await api({acao:'reacao',item:k,emoji:e,autor:S.me})}catch(err){toast('Não foi possível salvar a reação.');pull()}}else saveLocal();
+}
+function renderRx(){
+  document.querySelectorAll('.rx[data-k]').forEach(el=>{const k=el.dataset.k;
+    el.innerHTML=REACTS.map(r=>{const all=S.rx.filter(x=>x.item===k&&x.emoji===r[0]);const mine=all.some(x=>x.autor===S.me);return `<button type="button" data-e="${r[0]}" class="${mine?'mine':''}" aria-pressed="${mine}" title="${r[2]}" ${S.mode==='loading'?'disabled':''}>${r[1]} ${r[2]}${all.length?` <span class="n">${all.length}</span>`:''}</button>`}).join('')+`<button type="button" class="ask" data-ask="1">＋ Dúvida aqui</button>`;
+  });
+}
+document.addEventListener('click',e=>{const b=e.target.closest('.rx button');if(!b)return;const k=b.closest('.rx').dataset.k;if(b.dataset.ask)openComposer({tipo:'duvida',secao:secOf(k),trecho:k.startsWith('sec-')?'':itemLabel(k)});else toggleRx(k,b.dataset.e)});
+const NF=[['abertas','Dúvidas em aberto'],['respondidas','Respondidas'],['anotacoes','Anotações'],['todas','Tudo']];
+function renderNotes(){
+  if(!$('#nlist'))return;
+  const ab=S.notes.filter(n=>n.tipo==='duvida'&&!n.resolvida),rs=S.notes.filter(n=>n.tipo==='duvida'&&n.resolvida),an=S.notes.filter(n=>n.tipo!=='duvida');
+  const conf=S.rx.filter(r=>r.emoji==='confuso');
+  $('#nstatus').innerHTML=S.mode==='loading'?'Carregando anotações…':S.err?`Não foi possível carregar as anotações (${esc(S.err)}). Recarregue a página mais tarde.`:S.mode==='db'?`<span class="pill p-ok">Salvo na página</span> As anotações, reações e respostas ficam na Planilha do escritório.${S.slow?' As anotações podem estar desatualizadas; a conexão está lenta.':''}`:`<span class="pill p-warn">Só neste navegador</span> A Planilha ainda não foi ligada a este site.`;
+  $('#nstats').innerHTML=[['orange',ab.length,'dúvidas em aberto'],['green',rs.length,'dúvidas respondidas'],['blue',an.length,'anotações'],['coral',conf.length,'marcações "Confuso"']].map(s=>`<div class="stat" style="--c:var(--${s[0]})"><b>${s[1]}</b><span>${s[2]}</span></div>`).join('');
+  const cnt={};conf.forEach(r=>{cnt[r.item]=(cnt[r.item]||0)+1});const top=Object.entries(cnt).sort((a,b)=>b[1]-a[1]).slice(0,6);
+  $('#nhot').innerHTML=`<h3>Pontos que mais confundiram</h3>`+(top.length?`<ul class="hotlist">${top.map(([k,n])=>`<li><a href="#${secOf(k)}">${esc(itemLabel(k))}</a><span class="pill" style="--c:var(--coral)">🤔 ${n}</span></li>`).join('')}</ul>`:`<p class="hint">Ainda ninguém marcou nada como "Confuso". Os botões 👍 🤔 ⭐ aparecem no fim de cada aba, em cada etapa, regra e categoria.</p>`);
+  $('#nfilter').innerHTML=NF.map(f=>`<button type="button" data-f="${f[0]}" style="--c:var(--orange)" class="${S.filter===f[0]?'on':''}">${f[1]}</button>`).join('');
+  const list=S.filter==='abertas'?ab:S.filter==='respondidas'?rs:S.filter==='anotacoes'?an:S.notes;
+  if(!list.length){$('#nlist').innerHTML=`<div class="callout info"><svg class="ic"><use href="#i-note"/></svg><div>${S.filter==='abertas'?'Nenhuma dúvida em aberto.':'Nada por aqui ainda.'} Para registrar, use o botão laranja <b>Anotar ou perguntar</b>, o botão <b>＋ Dúvida aqui</b> no fim de cada bloco, ou selecione um trecho do texto e toque em <b>Anotar este trecho</b>.</div></div>`;return}
+  $('#nlist').innerHTML=list.map(n=>{const d=n.tipo==='duvida';const c=d?(n.resolvida?'green':'orange'):'blue';const lbl=d?(n.resolvida?'Dúvida respondida':'Dúvida em aberto'):'Anotação';const canDel=n.autor===S.me||S.owner;
+    return `<article class="card note" style="--c:var(--${c})" data-id="${esc(n.id)}"><div class="meta"><span class="pill">${lbl}</span><a href="#${esc(n.secao)}">${esc(tabName(n.secao))}</a><span>· ${esc(who(n.autor,n.autorNome))} · ${when(n.criadoEm)}</span></div>${n.trecho?`<blockquote class="qt">${esc(n.trecho)}</blockquote>`:''}<p class="txt">${esc(n.texto)}</p>${n.resposta?`<div class="resp"><span class="eyebrow" style="--c:var(--green)">Resposta · ${esc(n.respAutor||'Advogado')}</span><p class="txt">${esc(n.resposta)}</p></div>`:''}<div class="actions">${d?`<button type="button" class="btn sm" data-act="resp">${n.resposta?'Editar resposta':'Responder'}</button><button type="button" class="btn sm" data-act="res">${n.resolvida?'Reabrir':'Marcar como resolvida'}</button>`:''}${canDel?`<button type="button" class="btn sm" data-act="del">Excluir</button>`:''}</div></article>`}).join('');
+}
+$('#nfilter').addEventListener('click',e=>{const b=e.target.closest('button');if(b){S.filter=b.dataset.f;renderNotes()}});
+$('#nlist').addEventListener('click',async e=>{const b=e.target.closest('button[data-act]');if(!b)return;const card=b.closest('.note');const id=card.dataset.id;const n=S.notes.find(x=>x.id===id);if(!n)return;
+  try{
+    if(b.dataset.act==='res'){await updNote(id,{resolvida:!n.resolvida})}
+    else if(b.dataset.act==='del'){if(b.dataset.sure){await delNote(id);toast('Excluída')}else{b.dataset.sure='1';b.textContent='Toque de novo para excluir'}}
+    else if(b.dataset.act==='resp'){const a=card.querySelector('.actions');a.outerHTML=`<div class="stack"><textarea id="r-${esc(id)}" placeholder="Escreva a resposta">${esc(n.resposta)}</textarea><div class="actions"><input type="text" class="rnome" maxlength="60" placeholder="Seu nome" value="${esc(lsGet('trilha-nome',''))}"><button type="button" class="btn sm" data-act="cancel">Cancelar</button><button type="button" class="btn primary sm" data-act="send" style="--c:var(--green)">Salvar resposta</button></div></div>`;card.querySelector('textarea').focus()}
+    else if(b.dataset.act==='cancel'){renderNotes()}
+    else if(b.dataset.act==='send'){const v=card.querySelector('textarea').value.trim();if(!v)return;const rn=card.querySelector('.rnome');if(rn&&rn.value.trim())lsSet('trilha-nome',rn.value.trim());b.disabled=true;await updNote(id,{resposta:v,respAutor:S.me,resolvida:true});toast('Resposta salva')}
+  }catch(err){toast('Não foi possível salvar. Tente de novo.')}
+});
+/* Compositor */
+let ctipo='duvida';
+function setTipo(t){ctipo=t;document.querySelectorAll('#ctipo button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));$('#clabel').textContent=t==='duvida'?'Escreva sua dúvida':'Escreva sua anotação';$('#comp h3').textContent=t==='duvida'?'Nova dúvida':'Nova anotação'}
+$('#ctipo').addEventListener('click',e=>{const b=e.target.closest('button');if(b)setTipo(b.dataset.t)});
+$('#csec').innerHTML=tabs.filter(t=>t[0]!=='anotacoes').map(t=>`<option value="${t[0]}">${t[1]}</option>`).join('')+'<option value="geral">Geral</option>';
+let cTrecho='';
+function openComposer(o={}){
+  if(S.mode==='loading'){toast('Aguarde, carregando…');return}
+  setTipo(o.tipo||'duvida');const cur=(location.hash||'#mapa').slice(1);$('#csec').value=o.secao||(cur==='anotacoes'?'geral':cur);
+  cTrecho=o.trecho||'';const q=$('#cquote');q.hidden=!cTrecho;q.innerHTML=cTrecho?`<blockquote class="qt">${esc(cTrecho)}</blockquote><button type="button" class="btn sm" id="cqrm" style="margin-top:6px">Remover trecho</button>`:'';
+  if(cTrecho)$('#cqrm').onclick=()=>{cTrecho='';q.hidden=true};
+  $('#ctext').value='';$('#cnome').value=lsGet('trilha-nome','');$('#selbtn').hidden=true;
+  try{$('#comp').showModal()}catch(e){$('#comp').setAttribute('open','')}
+  setTimeout(()=>$('#ctext').focus(),30);
+}
+$('#ccancel').onclick=()=>$('#comp').close();
+$('#compform').addEventListener('submit',async e=>{e.preventDefault();const t=$('#ctext').value.trim();if(!t){$('#ctext').focus();return}
+  lsSet('trilha-nome',$('#cnome').value.trim());$('#csave').disabled=true;try{await addNote({tipo:ctipo,secao:$('#csec').value,trecho:cTrecho,texto:t});$('#comp').close();toast(ctipo==='duvida'?'Dúvida registrada':'Anotação salva')}catch(err){toast('Não foi possível salvar. Você pode não ter permissão de edição nesta página.')}$('#csave').disabled=false});
+$('#fab').onclick=()=>openComposer();
+$('#nnew').onclick=()=>openComposer();
+/* Selecionar trecho */
+let selT;
+document.addEventListener('selectionchange',()=>{clearTimeout(selT);selT=setTimeout(()=>{const sel=getSelection();const b=$('#selbtn');const t=sel&&sel.toString().trim();
+  if(!t||t.length<3||sel.rangeCount===0){b.hidden=true;return}
+  const node=sel.anchorNode&&(sel.anchorNode.nodeType===1?sel.anchorNode:sel.anchorNode.parentElement);
+  if(!node||!node.closest('main')||node.closest('#v-anotacoes,input,textarea,dialog,.wiz,.qz')){b.hidden=true;return}
+  const r=sel.getRangeAt(0).getBoundingClientRect();b.hidden=false;const w=b.offsetWidth;
+  b.style.left=Math.max(12,Math.min(innerWidth-w-12,r.left+r.width/2-w/2))+'px';b.style.top=Math.min(innerHeight-56,r.bottom+10)+'px';
+},250)});
+$('#selbtn').addEventListener('pointerdown',e=>e.preventDefault());
+$('#selbtn').addEventListener('click',()=>{const t=getSelection().toString().trim().slice(0,600);openComposer({tipo:'duvida',trecho:t})});
+addEventListener('scroll',()=>{$('#selbtn').hidden=true},{passive:true});
+/* Reações no fim de cada aba */
+tabs.filter(t=>t[0]!=='anotacoes').forEach(t=>{const d=document.createElement('div');d.className='secrx';d.innerHTML=`<span>O que achou desta parte?</span><div class="rx" data-k="sec-${t[0]}"></div>`;$('#v-'+t[0]).appendChild(d)});
+
+/* ---------- Início ---------- */
+drawMap();drawSteps();wiz('start');drawCats();drawRules();drawSystems();drawGloss();drawQuiz();
+['q-saida','q-graca','q-mpz','q-parto'].forEach(id=>$('#'+id).addEventListener('input',calcQ));
+['d-parto','d-comp','d-rem','d-sm','d-seguro'].forEach(id=>$('#'+id).addEventListener('input',calcD));
+document.querySelectorAll('[data-sm]').forEach(b=>b.onclick=()=>{$('#d-sm').value=b.dataset.sm;calcD()});
+$('#gsearch').addEventListener('input',e=>drawGloss(e.target.value));
+calcQ();calcD();show();renderRx();renderNotes();initStore();
+</script>
+
+</body>
+</html>
