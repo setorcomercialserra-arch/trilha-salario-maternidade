@@ -266,7 +266,7 @@ footer{color:var(--muted);font-size:.85rem;padding-block:24px 96px;border-top:1p
     <div class="txt">
       <div class="eyebrow">Bem-vinda à trilha</div>
       <h2>O que é o salário-maternidade?</h2>
-      <p>É o valor que o INSS (ou a empresa) paga à mãe por <b>120 dias</b> depois do nascimento, adoção ou guarda. Nosso trabalho é olhar os documentos da cliente e dizer se ela tem esse direito.</p>
+      <p>É o valor que o INSS (ou a empresa) paga à mãe por <b>120 dias</b> depois do nascimento, adoção ou guarda. O trabalho do escritório é olhar os documentos da cliente e dizer se ela tem esse direito. Esta trilha mostra como isso funciona, do começo ao fim.</p>
       <div class="chips">
         <span class="chip" style="--c:var(--pink)"><svg class="ic"><use href="#i-cert"/></svg>Certidão</span>
         <span class="chip" style="--c:var(--blue)"><svg class="ic"><use href="#i-cnis"/></svg>CNIS</span>
@@ -299,25 +299,25 @@ footer{color:var(--muted);font-size:.85rem;padding-block:24px 96px;border-top:1p
   <div class="mapbox" role="group" aria-label="Mapa mental"><svg viewBox="0 0 980 540" id="mapsvg"></svg></div>
   <div class="mapcards" id="mapcards"></div>
   <div class="detail" id="mapdetail" aria-live="polite"></div>
-  <div class="callout info"><svg class="ic"><use href="#i-alert"/></svg><div><b>A regra de ouro:</b> nunca presuma. Se o documento não mostra, a resposta é "Não é possível concluir" e você pede o documento que falta.</div></div>
+  <div class="callout info"><svg class="ic"><use href="#i-alert"/></svg><div><b>A regra de ouro do escritório:</b> nunca presumir. Se o documento não mostra, a resposta é "Não é possível concluir" e o escritório pede o documento que falta.</div></div>
 </section>
 
 <!-- FLUXO -->
 <section class="view" id="v-fluxo" hidden style="--c:var(--blue)">
-  <div class="head"><span class="badge"><svg class="ic"><use href="#i-route"/></svg></span><div><div class="eyebrow">Passo a passo do parecer</div><h2>Como analisar um caso</h2><p class="lead">Sempre nesta ordem. A categoria depende do CNIS, e os requisitos dependem da categoria. Toque numa etapa para abrir.</p></div></div>
+  <div class="head"><span class="badge"><svg class="ic"><use href="#i-route"/></svg></span><div><div class="eyebrow">Passo a passo do parecer</div><h2>Como o escritório analisa um caso</h2><p class="lead">A análise segue sempre esta ordem, porque a categoria depende do CNIS e os requisitos dependem da categoria. Toque numa etapa para ver o que acontece nela.</p></div></div>
   <div class="road" id="road"></div>
   <ol class="steps" id="steps"></ol>
 </section>
 
 <!-- TRIAGEM -->
 <section class="view" id="v-triagem" hidden style="--c:var(--violet)">
-  <div class="head"><span class="badge"><svg class="ic"><use href="#i-branch"/></svg></span><div><div class="eyebrow">Treino prático</div><h2>Triagem guiada</h2><p class="lead">Responda com o que está no documento da cliente. No fim aparece a conclusão provável e o que conferir. O parecer final continua com o advogado.</p></div></div>
+  <div class="head"><span class="badge"><svg class="ic"><use href="#i-branch"/></svg></span><div><div class="eyebrow">Simulação</div><h2>Triagem guiada</h2><p class="lead">É o raciocínio do escritório em forma de perguntas. Escolha as respostas para ver aonde cada caminho leva e por quê. Quem decide os casos reais é o advogado.</p></div></div>
   <div class="card wiz" id="wiz"></div>
 </section>
 
 <!-- CATEGORIAS -->
 <section class="view" id="v-categorias" hidden style="--c:var(--coral)">
-  <div class="head"><span class="badge"><svg class="ic"><use href="#i-user"/></svg></span><div><div class="eyebrow">Quem é a segurada</div><h2>Categorias de segurada</h2><p class="lead">Em pedidos desde 05/04/2024 não há carência. O que decide é a qualidade de segurada na data do parto. Use os botões para ver uma categoria por vez.</p></div></div>
+  <div class="head"><span class="badge"><svg class="ic"><use href="#i-user"/></svg></span><div><div class="eyebrow">Quem é a segurada</div><h2>Categorias de segurada</h2><p class="lead">Em pedidos desde 05/04/2024 não há carência. O que decide é a qualidade de segurada na data do parto. Os botões mostram uma categoria por vez.</p></div></div>
   <div class="callout"><svg class="ic"><use href="#i-money"/></svg><div><b>Quem paga?</b> Se ela está <b>empregada</b> no dia do parto, a <b>empresa</b> paga. Em todos os outros casos, o <b>INSS</b> paga direto.</div></div>
   <div class="quick" id="catfilter"></div>
   <div class="grid3" id="catcards"></div>
@@ -325,13 +325,13 @@ footer{color:var(--muted);font-size:.85rem;padding-block:24px 96px;border-top:1p
 
 <!-- REGRAS -->
 <section class="view" id="v-regras" hidden style="--c:var(--amber)">
-  <div class="head"><span class="badge"><svg class="ic"><use href="#i-book"/></svg></span><div><div class="eyebrow">Combinados internos</div><h2>Regras do escritório</h2><p class="lead">Valem por cima da lei quando a lei deixa espaço para escolha. Se parecerem contraditórias com um texto legal, pergunte ao advogado antes de concluir.</p></div></div>
+  <div class="head"><span class="badge"><svg class="ic"><use href="#i-book"/></svg></span><div><div class="eyebrow">Combinados internos</div><h2>Regras do escritório</h2><p class="lead">São os critérios que o escritório adota quando a lei deixa espaço para escolha. Em caso de conflito com um texto legal, quem decide é o advogado.</p></div></div>
   <div class="grid2" id="rules"></div>
 </section>
 
 <!-- CALCULADORAS -->
 <section class="view" id="v-calculadoras" hidden style="--c:var(--green)">
-  <div class="head"><span class="badge"><svg class="ic"><use href="#i-calc"/></svg></span><div><div class="eyebrow">Contas de todo dia</div><h2>Calculadoras</h2><p class="lead">Os campos já vêm com um exemplo. Troque pelos dados da cliente e veja a linha do tempo mudar.</p></div></div>
+  <div class="head"><span class="badge"><svg class="ic"><use href="#i-calc"/></svg></span><div><div class="eyebrow">Como as contas são feitas</div><h2>Calculadoras</h2><p class="lead">Os campos já vêm com um exemplo. Mude as datas e os valores para ver como o prazo muda na linha do tempo.</p></div></div>
   <div class="card form calccard" style="--c:var(--teal)">
     <h3>Até quando ela tem qualidade de segurada?</h3>
     <p class="hint">Regra do escritório: data de saída + meses de graça, mês seguinte, dia 15 do mês posterior. Com MPZ, mais 28 dias.</p>
@@ -383,7 +383,7 @@ footer{color:var(--muted);font-size:.85rem;padding-block:24px 96px;border-top:1p
 
 <!-- QUIZ -->
 <section class="view" id="v-quiz" hidden style="--c:var(--pink)">
-  <div class="head"><span class="badge"><svg class="ic"><use href="#i-quiz"/></svg></span><div><div class="eyebrow">Teste o que aprendeu</div><h2>Quiz de casos</h2><p class="lead">Casos fictícios montados com as regras desta trilha. Cada resposta explica o porquê.</p></div></div>
+  <div class="head"><span class="badge"><svg class="ic"><use href="#i-quiz"/></svg></span><div><div class="eyebrow">Teste o que aprendeu</div><h2>Quiz de casos</h2><p class="lead">Casos fictícios para fixar como o escritório pensa. Cada resposta explica o porquê.</p></div></div>
   <div class="card qz" id="quizbox"></div>
 </section>
 
@@ -507,12 +507,12 @@ function pick(id){
 
 /* ---------- Fluxo ---------- */
 const steps=[
-  ['heart','pink','Identificar o evento gerador','Certidão de nascimento',`<p>O evento pode ser nascimento, adoção, guarda judicial para adoção ou aborto não criminoso. Na maioria dos casos é o nascimento.</p><ul class="clean"><li>Anote a <b>data do evento</b>: é a data que decide tudo.</li><li>Anote o <b>nome da mãe</b> e confira se bate com o CNIS.</li><li>Anote o <b>nome da criança</b>.</li><li>Se ainda está grávida, use a <b>DPP</b> (data provável do parto).</li></ul><div class="callout"><svg class="ic"><use href="#i-alert"/></svg><div>Certidão ilegível ou nome da mãe diferente do CNIS é inconsistência. Registre no parecer.</div></div>`],
-  ['cnis','blue','Ler o CNIS','No AdvBox costuma vir como "extrato"',`<ul class="clean"><li>Vínculos: empresa, data de início e de fim.</li><li>Contribuições como facultativa, contribuinte individual ou MEI.</li><li>Remunerações mês a mês (procure meses abaixo do salário mínimo).</li><li>Indicadores ao lado das competências, como <span class="mono">PREC-FBR</span>.</li><li>Vínculo sem data de fim: confira no GERID ou na CTPS se ainda está ativo.</li></ul>`],
-  ['user','coral','Classificar a categoria','Uma só, na data do evento',`<p>Empregada CLT, doméstica, avulsa, contribuinte individual (inclui MEI), facultativa, segurada especial (rural), desempregada em período de graça, ou sem qualidade de segurada. Se não der para identificar, diga isso.</p><p><a href="#categorias">Ver os cartões de categorias →</a></p>`],
-  ['shield','teal','Conferir os requisitos','Qualidade de segurada é o decisivo',`<ul class="clean"><li><b>Qualidade de segurada</b> na data do parto: vínculo ativo, contribuição em dia ou período de graça.</li><li><b>Carência:</b> isenta para todas as categorias em pedidos desde 05/04/2024 (STF, ADI 2.110). CI, MEI e facultativa: basta 1 contribuição válida antes do parto.</li><li><b>Período de graça:</b> calcule na <a href="#calculadoras">calculadora</a>.</li><li><b>Vínculo ativo no parto:</b> quem paga é a empresa.</li></ul><span class="law">Lei 8.213/91 arts. 15, 25, 26, 71 a 73 · Decreto 3.048/99 · IN PRES/INSS 128/2022 (red. IN 188/2025)</span>`],
+  ['heart','pink','Identificar o evento gerador','Certidão de nascimento',`<p>O evento pode ser nascimento, adoção, guarda judicial para adoção ou aborto não criminoso. Na maioria dos casos é o nascimento.</p><ul class="clean"><li>A <b>data do evento</b> é a que decide tudo.</li><li>O <b>nome da mãe</b> precisa bater com o CNIS.</li><li>O <b>nome da criança</b> também é registrado.</li><li>Se ela ainda está grávida, usa-se a <b>DPP</b> (data provável do parto).</li></ul><div class="callout"><svg class="ic"><use href="#i-alert"/></svg><div>Certidão ilegível ou nome da mãe diferente do CNIS é inconsistência, e isso fica registrado no parecer.</div></div>`],
+  ['cnis','blue','Ler o CNIS','No AdvBox costuma vir como "extrato"',`<ul class="clean"><li>Vínculos: empresa, data de início e de fim.</li><li>Contribuições como facultativa, contribuinte individual ou MEI.</li><li>Remunerações mês a mês (os meses abaixo do salário mínimo chamam atenção).</li><li>Indicadores ao lado das competências, como <span class="mono">PREC-FBR</span>.</li><li>Vínculo sem data de fim: o GERID ou a CTPS mostram se ainda está ativo.</li></ul>`],
+  ['user','coral','Classificar a categoria','Uma só, na data do evento',`<p>Empregada CLT, doméstica, avulsa, contribuinte individual (inclui MEI), facultativa, segurada especial (rural), desempregada em período de graça, ou sem qualidade de segurada. Se não der para identificar, o parecer diz isso.</p><p><a href="#categorias">Ver os cartões de categorias →</a></p>`],
+  ['shield','teal','Conferir os requisitos','Qualidade de segurada é o decisivo',`<ul class="clean"><li><b>Qualidade de segurada</b> na data do parto: vínculo ativo, contribuição em dia ou período de graça.</li><li><b>Carência:</b> isenta para todas as categorias em pedidos desde 05/04/2024 (STF, ADI 2.110). CI, MEI e facultativa: basta 1 contribuição válida antes do parto.</li><li><b>Período de graça:</b> veja como é calculado na <a href="#calculadoras">calculadora</a>.</li><li><b>Vínculo ativo no parto:</b> quem paga é a empresa.</li></ul><span class="law">Lei 8.213/91 arts. 15, 25, 26, 71 a 73 · Decreto 3.048/99 · IN PRES/INSS 128/2022 (red. IN 188/2025)</span>`],
   ['search','amber','Procurar inconsistências','O que trava ou derruba o pedido',`<ul class="clean"><li>CNIS incompleto ou ausente.</li><li>Vínculo sem remuneração ou abaixo do mínimo (pode precisar de DARF).</li><li>Datas conflitantes entre CNIS, CTPS e certidão.</li><li>Certidão ilegível ou faltando.</li><li>Volta ao trabalho até 4 meses depois do parto.</li></ul>`],
-  ['check','green','Concluir','Uma de três respostas, justificada',`<div class="chips"><span class="pill p-ok">Tem direito</span><span class="pill p-bad">Não tem direito</span><span class="pill p-warn">Não é possível concluir</span></div><p>Cite o que o documento mostra: "CNIS: vínculo com Empresa X de 03/2023 a 20/01/2025; certidão: nascimento em 10/03/2026; qualidade mantida até 15/03/2026."</p><p>Para grávidas sem qualidade, o escritório usa <span class="pill p-info">Tem direito se pagar a GPS antes do parto</span>, com o prazo.</p>`]
+  ['check','green','Concluir','Uma de três respostas, justificada',`<div class="chips"><span class="pill p-ok">Tem direito</span><span class="pill p-bad">Não tem direito</span><span class="pill p-warn">Não é possível concluir</span></div><p>O parecer cita o que o documento mostra: "CNIS: vínculo com Empresa X de 03/2023 a 20/01/2025; certidão: nascimento em 10/03/2026; qualidade mantida até 15/03/2026."</p><p>Para grávidas sem qualidade, o escritório usa <span class="pill p-info">Tem direito se pagar a GPS antes do parto</span>, com o prazo.</p>`]
 ];
 function drawSteps(){
   $('#road').innerHTML=steps.map((s,i)=>`<button type="button" class="st" data-i="${i}" style="--c:var(--${s[1]})"><span class="badge solid">${I(s[0])}</span>${s[2]}</button>`).join('');
@@ -662,10 +662,10 @@ function calcD(){
 
 /* ---------- Sistemas ---------- */
 const systems=[
-  ['Planilhas do Google Drive','De onde vem a lista de clientes','sheet','green',[['Relatório Diário Comercial','Aba da vendedora','Semana e dia']],['Uma aba por vendedora; cada dia tem colunas de clientes e de grávidas.','"Tipo de processo": Bom, Judicial, Rural, Trabalhista, Tentativa, Bpc.','As colunas Contou, Pendências e Observações são da conferência: é você quem preenche.','A planilha não traz CNIS nem certidão.']],
-  ['AdvBox','Onde ficam certidão e CNIS','cloud','blue',[['Contatos','Buscar pelo nome','Clicar no nome','Ícone de nuvem']],['A busca só acha por nome, não por CPF. Se não achar, tente primeiro nome + um sobrenome.','Há homônimos: confira sempre o CPF.','Cuidado: o ícone de pasta na linha abre "Criar novo processo". Feche sem salvar.','Arquivos típicos: "certidão", "extrato" (CNIS), "GERID", "DARF", "NOSSO PROTOCOLO".','Etiquetas: "PAGAR GPS" = sem qualidade; "NÃO PAGAR GPS / DENTRO DO PRAZO" = com qualidade; "GRÁVIDA GPS REGISTRADA" = CLT.']],
-  ['Tramitação Inteligente','Andamento do pedido no INSS','mail','violet',[['Pesquisar','Clientes','CPF','Abrir','E-mail exclusivo']],['Use quando o AdvBox não resolve o caso.','Buscar por CPF é o caminho mais rápido.','Os e-mails são avisos do INSS. "Concluída" não diz o resultado: abra e leia o despacho (concedido ou indeferido, número do benefício).']],
-  ['DataCrazy (CRM)','Histórico de atendimento por WhatsApp','chat','pink',[['Pesquise seus contatos','Trecho do nome sem acento']],['Só leitura: nunca envie mensagem, não clique em "Finalizar" nem em "Marcar como lido".','A busca é por trecho do nome. Tente nome completo, depois os 2 primeiros nomes, depois os 2 últimos sobrenomes.','Alguns cadastros têm o nome da vendedora no fim (ex.: "… - hellen").']]
+  ['Planilhas do Google Drive','De onde vem a lista de clientes','sheet','green',[['Relatório Diário Comercial','Aba da vendedora','Semana e dia']],['Uma aba por vendedora; cada dia tem colunas de clientes e de grávidas.','"Tipo de processo": Bom, Judicial, Rural, Trabalhista, Tentativa, Bpc.','As colunas Contou, Pendências e Observações são preenchidas na conferência.','A planilha não traz CNIS nem certidão.']],
+  ['AdvBox','Onde ficam certidão e CNIS','cloud','blue',[['Contatos','Buscar pelo nome','Clicar no nome','Ícone de nuvem']],['A busca só acha por nome, não por CPF. Quando não acha, tenta-se primeiro nome + um sobrenome.','Há homônimos, por isso o CPF é sempre conferido.','Cuidado: o ícone de pasta na linha abre "Criar novo processo". Feche sem salvar.','Arquivos típicos: "certidão", "extrato" (CNIS), "GERID", "DARF", "NOSSO PROTOCOLO".','Etiquetas: "PAGAR GPS" = sem qualidade; "NÃO PAGAR GPS / DENTRO DO PRAZO" = com qualidade; "GRÁVIDA GPS REGISTRADA" = CLT.']],
+  ['Tramitação Inteligente','Andamento do pedido no INSS','mail','violet',[['Pesquisar','Clientes','CPF','Abrir','E-mail exclusivo']],['É usado quando o AdvBox não resolve o caso.','Buscar por CPF é o caminho mais rápido.','Os e-mails são avisos do INSS. "Concluída" não diz o resultado: é preciso abrir e ler o despacho (concedido ou indeferido, número do benefício).']],
+  ['DataCrazy (CRM)','Histórico de atendimento por WhatsApp','chat','pink',[['Pesquise seus contatos','Trecho do nome sem acento']],['Só leitura: nunca envie mensagem, não clique em "Finalizar" nem em "Marcar como lido".','A busca é por trecho do nome: nome completo, depois os 2 primeiros nomes, depois os 2 últimos sobrenomes.','Alguns cadastros têm o nome da vendedora no fim (ex.: "… - hellen").']]
 ];
 function drawSystems(){
   $('#sysflow').innerHTML=systems.map((s,i)=>`${i?'<span class="arrow">→</span>':''}<span class="fstep" style="--c:var(--${s[3]})"><span class="badge solid">${I(s[2])}</span>${s[0].replace(' do Google Drive','')}</span>`).join('');
@@ -722,7 +722,7 @@ let qi=0,score=0,hist=[];
 function dots(){return `<div class="dots">${quiz.map((_,i)=>`<span class="${hist[i]===true?'r':hist[i]===false?'w':''}${i===qi?' c':''}"></span>`).join('')}</div>`}
 function drawQuiz(){
   const box=$('#quizbox');
-  if(qi>=quiz.length){const all=score===quiz.length;box.innerHTML=`<div class="result ${all?'ok':score>=6?'info':'warn'}"><span class="badge solid">${I(all?'check':'quiz')}</span><div><h3>${score} de ${quiz.length} acertos</h3><p>${all?'Perfeito. Você está pronta para conferir casos reais com o advogado.':'Revise as regras dos casos em vermelho e tente de novo.'}</p></div></div>${dots()}<div><button class="btn primary" id="qrestart">Refazer o quiz</button></div>`;$('#qrestart').onclick=()=>{qi=0;score=0;hist=[];drawQuiz()};return}
+  if(qi>=quiz.length){const all=score===quiz.length;box.innerHTML=`<div class="result ${all?'ok':score>=6?'info':'warn'}"><span class="badge solid">${I(all?'check':'quiz')}</span><div><h3>${score} de ${quiz.length} acertos</h3><p>${all?'Perfeito. Você entendeu bem como o escritório raciocina.':'Releia as regras dos casos em vermelho e tente de novo.'}</p></div></div>${dots()}<div><button class="btn primary" id="qrestart">Refazer o quiz</button></div>`;$('#qrestart').onclick=()=>{qi=0;score=0;hist=[];drawQuiz()};return}
   const c=quiz[qi];
   box.innerHTML=`<div class="crumbs"><span>Caso ${qi+1} de ${quiz.length}</span><span>${score} acerto(s)</span></div>${dots()}<h3>${c.q}</h3><div class="ans">${c.o.map((o,i)=>`<button data-i="${i}">${o}</button>`).join('')}</div><div id="qfb"></div>`;
   box.querySelectorAll('.ans button').forEach(b=>b.onclick=()=>{
