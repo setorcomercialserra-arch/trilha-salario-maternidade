@@ -188,6 +188,29 @@ input,select{font:inherit;font-family:var(--f-body);padding:9px 11px;border:1.5p
 .flow .fstep{display:flex;align-items:center;gap:8px;font-weight:700}
 .flow .arrow{color:var(--muted);font-weight:800}
 
+.sysnav{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.sysnav button{font:inherit;display:flex;gap:12px;align-items:center;text-align:left;padding:12px 14px;border-radius:var(--r);border:2px solid color-mix(in srgb,var(--c) 35%,var(--line));background:var(--surface);color:var(--fg);cursor:pointer}
+.sysnav button b{display:block;font-family:var(--f-display)}
+.sysnav button small{color:var(--muted)}
+.sysnav button.on{background:color-mix(in srgb,var(--c) 14%,var(--surface));border-color:var(--c)}
+.tut{border-radius:var(--r);background:var(--surface);border:1px solid var(--line);overflow:hidden;border-top:6px solid var(--c)}
+.tut .hd{padding:16px 18px;display:flex;gap:14px;align-items:flex-start;background:color-mix(in srgb,var(--c) 10%,var(--surface))}
+.tut .hd>div{display:grid;gap:4px;min-width:0}
+.tut .bd{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:18px;padding:18px}
+@media (max-width:760px){.tut .bd{grid-template-columns:1fr}}
+ol.tsteps{list-style:none;margin:0;padding:0;display:grid;gap:6px;align-content:start}
+ol.tsteps li button{font:inherit;width:100%;display:flex;gap:10px;align-items:flex-start;text-align:left;padding:8px 10px;border-radius:10px;border:1.5px solid transparent;background:none;color:var(--fg);cursor:pointer}
+ol.tsteps li button:hover{background:color-mix(in srgb,var(--c) 8%,var(--surface))}
+ol.tsteps li button.on{border-color:var(--c);background:color-mix(in srgb,var(--c) 12%,var(--surface))}
+ol.tsteps .nb{flex:0 0 26px;height:26px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:.8rem;background:color-mix(in srgb,var(--c) 18%,var(--surface));color:var(--c)}
+ol.tsteps button.on .nb,ol.tsteps button.done .nb{background:var(--c);color:var(--surface)}
+.screen{display:grid;gap:12px;align-content:start}
+.screen svg{width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--line)}
+.screen svg text{font-family:var(--f-body)}
+.screen .stxt{display:grid;gap:6px}
+.screen .stxt h4{font-size:1.05rem}
+.nav2{display:flex;gap:8px;justify-content:space-between;align-items:center}
+.tut .care{padding:0 18px 18px;display:grid;gap:10px}
 /* Glossário */
 .search{max-width:420px}
 dl.gloss{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px;margin:0}
@@ -368,10 +391,11 @@ footer{color:var(--muted);font-size:.85rem;padding-block:24px 96px;border-top:1p
 
 <!-- SISTEMAS -->
 <section class="view" id="v-sistemas" hidden style="--c:var(--indigo)">
-  <div class="head"><span class="badge"><svg class="ic"><use href="#i-monitor"/></svg></span><div><div class="eyebrow">Onde estão as informações</div><h2>Sistemas do dia a dia</h2><p class="lead">A lista vem das planilhas, os documentos estão no AdvBox, o andamento no INSS aparece no Tramitação Inteligente. O CRM mostra o atendimento.</p></div></div>
+  <div class="head"><span class="badge"><svg class="ic"><use href="#i-monitor"/></svg></span><div><div class="eyebrow">Onde estão as informações</div><h2>Sistemas do dia a dia</h2><p class="lead">Cada sistema tem um papel: a lista vem das planilhas, os documentos estão no AdvBox, o andamento no INSS aparece no Tramitação Inteligente e o CRM mostra o atendimento. Escolha um sistema e siga o passo a passo ilustrado.</p></div></div>
   <div class="flow" id="sysflow"></div>
   <div class="callout bad"><svg class="ic"><use href="#i-lock"/></svg><div><b>Nunca</b> use senhas do gov.br que aparecem nas planilhas ou nas notas do AdvBox. Nunca mande mensagem nem finalize conversa no CRM.</div></div>
-  <div class="grid2" id="systems"></div>
+  <div class="sysnav" id="sysnav"></div>
+  <div id="syspanel"></div>
 </section>
 
 <!-- GLOSSARIO -->
@@ -662,15 +686,86 @@ function calcD(){
 
 /* ---------- Sistemas ---------- */
 const systems=[
-  ['Planilhas do Google Drive','De onde vem a lista de clientes','sheet','green',[['Relatório Diário Comercial','Aba da vendedora','Semana e dia']],['Uma aba por vendedora; cada dia tem colunas de clientes e de grávidas.','"Tipo de processo": Bom, Judicial, Rural, Trabalhista, Tentativa, Bpc.','As colunas Contou, Pendências e Observações são preenchidas na conferência.','A planilha não traz CNIS nem certidão.']],
-  ['AdvBox','Onde ficam certidão e CNIS','cloud','blue',[['Contatos','Buscar pelo nome','Clicar no nome','Ícone de nuvem']],['A busca só acha por nome, não por CPF. Quando não acha, tenta-se primeiro nome + um sobrenome.','Há homônimos, por isso o CPF é sempre conferido.','Cuidado: o ícone de pasta na linha abre "Criar novo processo". Feche sem salvar.','Arquivos típicos: "certidão", "extrato" (CNIS), "GERID", "DARF", "NOSSO PROTOCOLO".','Etiquetas: "PAGAR GPS" = sem qualidade; "NÃO PAGAR GPS / DENTRO DO PRAZO" = com qualidade; "GRÁVIDA GPS REGISTRADA" = CLT.']],
-  ['Tramitação Inteligente','Andamento do pedido no INSS','mail','violet',[['Pesquisar','Clientes','CPF','Abrir','E-mail exclusivo']],['É usado quando o AdvBox não resolve o caso.','Buscar por CPF é o caminho mais rápido.','Os e-mails são avisos do INSS. "Concluída" não diz o resultado: é preciso abrir e ler o despacho (concedido ou indeferido, número do benefício).']],
-  ['DataCrazy (CRM)','Histórico de atendimento por WhatsApp','chat','pink',[['Pesquise seus contatos','Trecho do nome sem acento']],['Só leitura: nunca envie mensagem, não clique em "Finalizar" nem em "Marcar como lido".','A busca é por trecho do nome: nome completo, depois os 2 primeiros nomes, depois os 2 últimos sobrenomes.','Alguns cadastros têm o nome da vendedora no fim (ex.: "… - hellen").']]
+ {n:'Planilhas do Drive',s:'Lista de clientes do dia',i:'sheet',c:'green',
+  p:'É onde o comercial lança cada cliente atendida. A análise começa aqui: a planilha diz quem são as clientes, mas não traz certidão nem CNIS.',
+  st:[
+   ['Abrir a planilha do mês','No Google Drive, abra o "Relatório Diário Comercial" do mês (ex.: Novembro 2026). Existe uma planilha por mês.','sheet','Relatório Diário Comercial'],
+   ['Escolher a aba da vendedora','Cada vendedora tem uma aba: Carolayne, Emily, Maria, Evelin, Hellen e Halana. As abas RESUMO e DADOS são só painéis com totais.','tabs','Hellen'],
+   ['Achar a semana e o dia','A aba é dividida em blocos por semana, e cada dia ocupa um grupo de colunas. Uma parte do dia é de clientes que já tiveram o bebê; outra é de grávidas.','grid','Qua 12/11'],
+   ['Ler a descrição','Na coluna Descrição, "CRM" é cliente que veio pelo CRM com o bebê já nascido. Na parte das grávidas aparece Grávida, Judicial, Nascida, Tentativa ou Rural, e o tipo (GPS FACULTATIVO, GPS MEI, GRÁVIDA BOA).','grid','CRM'],
+   ['Copiar nome e CPF','Com o nome e o CPF da cliente em mãos, o próximo passo é procurar os documentos no AdvBox.','grid','Nome · CPF'],
+   ['Planilha da conferência','Algumas vendedoras têm planilha própria (ex.: "Maria Fernanda - Outubro"). As colunas Contou, Pendências e Observações são preenchidas por quem confere, e "Contou" usa a lista suspensa.','grid','Contou ▾']
+  ],
+  cu:['A coluna "Senha" tem a senha gov.br da cliente. Ela nunca é usada.','A planilha de "Certidões" é só uma contagem, sem nomes.']},
+ {n:'AdvBox',s:'Certidão, CNIS e documentos',i:'cloud',c:'blue',
+  p:'É o sistema de gestão do escritório. Cada cliente tem um cadastro com os arquivos enviados: certidão, CNIS, GERID, comprovantes e protocolos.',
+  st:[
+   ['Entrar no AdvBox','O AdvBox abre no navegador e já fica logado na conta do escritório. Se a tela de Contatos ficar carregando, volte para a página inicial e clique em Contatos de novo.','menu','Contatos'],
+   ['Buscar pelo nome','A busca de Contatos só encontra pelo nome, não pelo CPF. Se não aparecer, tente só o primeiro nome com um sobrenome, ou só o sobrenome mais raro: às vezes o nome foi cadastrado com uma letra a menos ou com sobrenome trocado.','search','Buscar: Maria Souza'],
+   ['Conferir se é a cliente certa','Há clientes com o mesmo nome. O CPF confirma: ele aparece nas notas do contato, no CNIS ou no comprovante de requerimento.','list','Maria Souza · CPF'],
+   ['Abrir os arquivos','Clique no nome da cliente. Abre um painel lateral, e o ícone de nuvem mostra os arquivos.','panel','☁'],
+   ['Reconhecer os arquivos','"certidão" é a certidão de nascimento; "extrato" é o CNIS; "GERID" é um print com as datas dos vínculos; também aparecem "DARF", "seguro desemprego" e "NOSSO PROTOCOLO" (o protocolo no INSS). Clicar abre o PDF numa aba nova.','files','extrato (CNIS)'],
+   ['Ler as etiquetas e notas','As notas e etapas resumem a situação: "PAGAR GPS" = sem qualidade; "NÃO PAGAR GPS / DENTRO DO PRAZO" = com qualidade; "GRÁVIDA GPS REGISTRADA" = tem carteira assinada.','tags','PAGAR GPS']
+  ],
+  cu:['O ícone de pasta na linha da lista abre "Criar novo processo". Se abrir sem querer, feche sem salvar.','As notas às vezes têm senha do gov.br ou Meu INSS. Essas senhas nunca são usadas nem copiadas.']},
+ {n:'Tramitação Inteligente',s:'Andamento no INSS',i:'mail',c:'violet',
+  p:'Recebe os e-mails que o INSS manda sobre o pedido de cada cliente. É onde se vê se o pedido foi protocolado, se tem exigência e se foi concedido.',
+  st:[
+   ['Quando usar','Quando o AdvBox não mostra em que pé está o pedido no INSS, a resposta costuma estar aqui.','menu','Pesquisar'],
+   ['Pesquisar o cliente','No menu, vá em Pesquisar e depois em Clientes.','menu','Clientes'],
+   ['Buscar pelo CPF','O caminho mais rápido é o campo de CPF. Digitar o CPF no campo de texto livre não encontra ninguém.','search','CPF: 000.000.000-00'],
+   ['Abrir a cliente','Na lista, clique em Abrir na linha da cliente.','list','Abrir'],
+   ['Ir ao e-mail exclusivo','Na ficha da cliente, abra "E-mail exclusivo". Ali ficam, em ordem, todos os avisos do INSS.','mail','E-mail exclusivo'],
+   ['Ler a última movimentação','"Requerimento realizado com sucesso" quer dizer que o pedido foi protocolado. "Concluída" não diz o resultado: é preciso abrir o e-mail e ler o despacho, que diz se foi concedido ou indeferido e traz o número do benefício (NB).','doc','Despacho: CONCEDIDO']
+  ],
+  cu:['O sistema já fica logado; ninguém digita senha de cliente.','Abrir um e-mail não marca nada no INSS, é só leitura.']},
+ {n:'DataCrazy (CRM)',s:'Conversas de WhatsApp',i:'chat',c:'pink',
+  p:'É o CRM onde o comercial conversa com as clientes pelo WhatsApp. Serve para ver se a cliente está em atendimento, desde quando e com qual vendedora.',
+  st:[
+   ['Abrir o CRM','O DataCrazy abre no navegador, já logado na conta do escritório, na tela de atendimento.','menu','Atendimento'],
+   ['Pesquisar o contato','Use a caixa "Pesquise seus contatos". A busca é por trecho do nome e sem acento: um nome do meio a mais já impede de achar. Tente o nome completo, depois os dois primeiros nomes, depois os dois últimos sobrenomes.','search','Pesquise seus contatos'],
+   ['Ler a lista de conversas','Cada linha é uma conversa, com status (Em aberto, Não iniciada, Automação, Finalizada), etiquetas como GANHO ou GRÁVIDA QUALIFICADA, a data e o setor (COMERCIAL, IA & SDR). A lista mostra no máximo 20 itens.','list','Em aberto · GANHO'],
+   ['Atenção aos cadastros repetidos','A mesma cliente pode ter várias conversas ou dois cadastros. Muitos nomes têm o nome da vendedora no fim, como "Ana Silva - hellen".','list','Ana Silva - hellen'],
+   ['Contato sem conversa','Quem aparece em "Inicie novas conversas" está cadastrada mas nunca conversou. Isso não conta como atendimento.','tags','Inicie novas conversas']
+  ],
+  cu:['O CRM é conversa ao vivo com a cliente: nunca envie mensagem, nem clique em "Finalizar" ou "Marcar como lido".','Evite abrir a conversa só para olhar: isso pode marcar as mensagens como lidas para a vendedora.']}
 ];
-function drawSystems(){
-  $('#sysflow').innerHTML=systems.map((s,i)=>`${i?'<span class="arrow">→</span>':''}<span class="fstep" style="--c:var(--${s[3]})"><span class="badge solid">${I(s[2])}</span>${s[0].replace(' do Google Drive','')}</span>`).join('');
-  $('#systems').innerHTML=systems.map(s=>`<div class="sys" style="--c:var(--${s[3]})"><div class="top"><span class="badge">${I(s[2])}</span><div><div class="eyebrow">${s[1]}</div><h3>${s[0]}</h3></div></div><div class="bd">${s[4].map(p=>`<div class="path">${p.map((x,i)=>(i?'<i>›</i>':'')+`<b>${x}</b>`).join('')}</div>`).join('')}<ul class="clean">${s[5].map(x=>`<li>${x}</li>`).join('')}</ul></div></div>`).join('');
+function mock(kind,label,c){
+  const L=esc(label);const C=`var(--${c})`;
+  let h=`<rect width="360" height="210" fill="var(--sunk)"/><rect x="0" y="0" width="360" height="24" fill="var(--surface)"/><circle cx="14" cy="12" r="4" fill="var(--coral)"/><circle cx="28" cy="12" r="4" fill="var(--amber)"/><circle cx="42" cy="12" r="4" fill="var(--green)"/><rect x="60" y="6" width="230" height="12" rx="6" fill="var(--sunk)"/>`;
+  const bar=(x,y,w,f='var(--line)')=>`<rect x="${x}" y="${y}" width="${w}" height="8" rx="4" fill="${f}"/>`;
+  const hl=(x,y,w,hh,t)=>`<rect x="${x}" y="${y}" width="${w}" height="${hh}" rx="8" fill="color-mix(in srgb,${C} 18%,var(--surface))" stroke="${C}" stroke-width="2.5"/><text x="${x+10}" y="${y+hh/2+4}" font-size="11.5" font-weight="700" fill="var(--fg)">${t}</text>`;
+  const side=()=>`<rect x="0" y="24" width="78" height="186" fill="var(--surface)"/>`+[44,64,84,104,124].map(y=>bar(12,y,52)).join('');
+  if(kind==='sheet'){h+=`<rect x="20" y="40" width="320" height="150" rx="10" fill="var(--surface)"/>`;for(let r=0;r<4;r++)h+=`<rect x="36" y="${70+r*28}" width="22" height="22" rx="4" fill="var(--green)" opacity=".8"/>`+bar(68,77+r*28,150);h+=hl(30,44,300,22,L)}
+  else if(kind==='tabs'){h+=`<rect x="10" y="32" width="340" height="140" fill="var(--surface)"/>`;for(let r=0;r<6;r++)for(let k=0;k<6;k++)h+=`<rect x="${14+k*56}" y="${36+r*22}" width="52" height="18" fill="var(--sunk)"/>`;['RESUMO','Carolayne','Maria',L,'Evelin'].forEach((t,i)=>{h+=t===L?hl(14+i*68,178,64,24,t):`<rect x="${14+i*68}" y="178" width="64" height="24" rx="6" fill="var(--surface)"/><text x="${20+i*68}" y="194" font-size="10" fill="var(--muted)">${t}</text>`})}
+  else if(kind==='grid'){h+=`<rect x="10" y="32" width="340" height="170" fill="var(--surface)"/>`;for(let r=0;r<7;r++)for(let k=0;k<5;k++)h+=`<rect x="${14+k*67}" y="${36+r*23}" width="63" height="19" fill="${r===0?'var(--line)':'var(--sunk)'}"/>`;h+=hl(81,82,130,26,L)}
+  else if(kind==='menu'){h+=side()+hl(6,58,100,26,L);h+=`<rect x="120" y="40" width="220" height="150" rx="10" fill="var(--surface)"/>`+bar(136,60,150)+bar(136,80,110)+bar(136,100,170)}
+  else if(kind==='search'){h+=side()+hl(94,38,250,30,L+'  ⌕');for(let r=0;r<4;r++)h+=`<rect x="94" y="${84+r*28}" width="250" height="22" rx="6" fill="var(--surface)"/>`+bar(104,91+r*28,120)}
+  else if(kind==='list'){h+=side();for(let r=0;r<5;r++)h+=r===1?hl(94,40+r*32,250,26,L):`<rect x="94" y="${40+r*32}" width="250" height="26" rx="6" fill="var(--surface)"/>`+bar(104,49+r*32,130)}
+  else if(kind==='panel'){h+=side();for(let r=0;r<5;r++)h+=`<rect x="94" y="${40+r*32}" width="140" height="26" rx="6" fill="var(--surface)"/>`+bar(104,49+r*32,90);h+=`<rect x="244" y="30" width="112" height="176" rx="10" fill="var(--surface)" stroke="var(--line)"/>`+bar(256,46,80)+bar(256,62,60);h+=`<rect x="256" y="84" width="24" height="24" rx="6" fill="var(--sunk)"/><rect x="316" y="84" width="24" height="24" rx="6" fill="var(--sunk)"/>`+hl(284,82,30,28,'')+`<text x="292" y="101" font-size="14">☁</text>`}
+  else if(kind==='files'){h+=`<rect x="20" y="34" width="320" height="168" rx="10" fill="var(--surface)"/>`;['certidão','GERID',L,'seguro desemprego','NOSSO PROTOCOLO'].forEach((t,i)=>{h+=t===L?hl(30,42+i*31,300,26,'📄 '+t):`<text x="40" y="${59+i*31}" font-size="11.5" fill="var(--muted)">📄 ${t}</text>`})}
+  else if(kind==='tags'){h+=`<rect x="20" y="34" width="320" height="168" rx="10" fill="var(--surface)"/>`+bar(36,52,180)+bar(36,70,120);h+=hl(36,94,170,28,L);h+=`<rect x="216" y="94" width="100" height="28" rx="14" fill="var(--sunk)"/>`+bar(36,140,220)+bar(36,158,160)}
+  else if(kind==='mail'){h+=side()+hl(6,98,100,26,L);['Concluída','Exigência','Requerimento realizado'].forEach((t,i)=>{h+=`<rect x="94" y="${40+i*34}" width="250" height="28" rx="6" fill="var(--surface)"/><text x="104" y="${58+i*34}" font-size="11" fill="var(--fg)">✉ ${t}</text>`})}
+  else if(kind==='doc'){h+=`<rect x="70" y="32" width="220" height="172" rx="8" fill="var(--surface)"/>`+bar(86,48,150)+bar(86,64,180)+bar(86,80,120)+hl(82,100,196,28,L)+bar(86,144,170)+bar(86,160,140)+`<text x="86" y="190" font-size="10.5" fill="var(--muted)">NB 000.000.000-0</text>`}
+  return `<svg viewBox="0 0 360 210" role="img" aria-label="Ilustração da tela: ${L}">${h}</svg>`;
 }
+let sysSel=0,sysStep=0;
+function drawSystems(){
+  $('#sysflow').innerHTML=systems.map((s,i)=>`${i?'<span class="arrow">→</span>':''}<span class="fstep" style="--c:var(--${s.c})"><span class="badge solid">${I(s.i)}</span>${s.n}</span>`).join('');
+  $('#sysnav').innerHTML=systems.map((s,i)=>`<button type="button" data-i="${i}" style="--c:var(--${s.c})" class="${i===sysSel?'on':''}"><span class="badge ${i===sysSel?'solid':''}">${I(s.i)}</span><span><b>${s.n}</b><small>${s.s}</small></span></button>`).join('');
+  const s=systems[sysSel],t=s.st[sysStep];
+  $('#syspanel').innerHTML=`<article class="tut" style="--c:var(--${s.c})"><div class="hd"><span class="badge solid">${I(s.i)}</span><div><div class="eyebrow">Para que serve</div><h3>${s.n}</h3><p>${s.p}</p></div></div>
+  <div class="bd"><ol class="tsteps">${s.st.map((x,j)=>`<li><button type="button" data-j="${j}" class="${j===sysStep?'on':j<sysStep?'done':''}"><span class="nb">${j+1}</span><span>${x[0]}</span></button></li>`).join('')}</ol>
+  <div class="screen">${mock(t[2],t[3],s.c)}<div class="stxt"><span class="eyebrow">Passo ${sysStep+1} de ${s.st.length}</span><h4>${t[0]}</h4><p>${t[1]}</p></div>
+  <div class="nav2"><button type="button" class="btn sm" data-mv="-1" ${sysStep?'':'disabled'}>← Anterior</button><button type="button" class="btn primary sm" data-mv="1">${sysStep<s.st.length-1?'Próximo passo →':(sysSel<systems.length-1?'Próximo sistema →':'Recomeçar')}</button></div></div></div>
+  <div class="care"><div class="callout bad"><svg class="ic"><use href="#i-lock"/></svg><div><b>Cuidados</b><ul class="clean">${s.cu.map(x=>`<li>${x}</li>`).join('')}</ul></div></div><div class="rx" data-k="sys-${sysSel}"></div></div></article>`;
+  if(typeof renderRx==='function'&&typeof S!=='undefined')renderRx();
+}
+document.addEventListener('click',e=>{
+  const nb=e.target.closest('#sysnav button');if(nb){sysSel=+nb.dataset.i;sysStep=0;drawSystems();return}
+  const sb=e.target.closest('#syspanel .tsteps button');if(sb){sysStep=+sb.dataset.j;drawSystems();return}
+  const mv=e.target.closest('#syspanel [data-mv]');if(mv){const s=systems[sysSel];const d=+mv.dataset.mv;if(d>0&&sysStep===s.st.length-1){sysSel=(sysSel+1)%systems.length;sysStep=0}else sysStep=Math.max(0,sysStep+d);drawSystems();$('#syspanel').scrollIntoView({block:'nearest'})}
+});
 
 /* ---------- Glossário ---------- */
 const gc=['teal','blue','violet','pink','coral','amber','green','indigo'];
@@ -740,9 +835,9 @@ let DB=null,USER=null;
 const esc=t=>String(t??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function lsGet(k,d){try{const v=JSON.parse(localStorage.getItem(k));return v??d}catch(e){return d}}
 function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
-function secOf(k){if(k.startsWith('sec-'))return k.slice(4);if(k.startsWith('step-'))return 'fluxo';if(k.startsWith('rule-'))return 'regras';if(k.startsWith('cat-'))return 'categorias';return k}
+function secOf(k){if(k.startsWith('sec-'))return k.slice(4);if(k.startsWith('sys-'))return 'sistemas';if(k.startsWith('step-'))return 'fluxo';if(k.startsWith('rule-'))return 'regras';if(k.startsWith('cat-'))return 'categorias';return k}
 function tabName(id){const t=tabs.find(x=>x[0]===id);return t?t[1]:'Geral'}
-function itemLabel(k){const i=+k.split('-')[1];if(k.startsWith('step-'))return 'Etapa '+(i+1)+': '+steps[i][2];if(k.startsWith('rule-'))return 'Regra: '+rules[i][3];if(k.startsWith('cat-'))return 'Categoria: '+cats[i][0];return 'Aba '+tabName(secOf(k))}
+function itemLabel(k){const i=+k.split('-')[1];if(k.startsWith('sys-'))return 'Sistema: '+systems[i].n;if(k.startsWith('step-'))return 'Etapa '+(i+1)+': '+steps[i][2];if(k.startsWith('rule-'))return 'Regra: '+rules[i][3];if(k.startsWith('cat-'))return 'Categoria: '+cats[i][0];return 'Aba '+tabName(secOf(k))}
 function who(id,nome){if(id&&id===S.me)return 'Você';return nome||(id&&!String(id).startsWith('d')?id:'')||'Alguém'}
 function when(t){try{return new Date(t).toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})}catch(e){return ''}}
 let toastT;function toast(m){const t=$('#toast');t.textContent=m;t.hidden=false;clearTimeout(toastT);toastT=setTimeout(()=>t.hidden=true,2600)}
